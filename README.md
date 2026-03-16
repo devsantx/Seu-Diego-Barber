@@ -1,37 +1,54 @@
-# Seu Diego Barber — Landing Page
+﻿# Seu Diego Barber — Landing Page
 
-Site oficial da barbearia Seu Diego Barber, pensado para apresentar a marca com elegância e facilitar o contato pelo WhatsApp. Aqui o cliente encontra planos, equipe, horários e todas as informações essenciais em uma experiência visual premium.
+Landing page oficial da barbearia Seu Diego Barber. O objetivo é apresentar a marca com elegância, destacar planos e equipe, e facilitar o contato rápido pelo WhatsApp.
 
-## Intuito do site
-Este site foi criado para fortalecer a presença digital da barbearia, valorizar a identidade da marca e tornar o agendamento mais simples e direto. A ideia é que o cliente consiga entender os planos, conhecer a equipe e entrar em contato rapidamente, tudo em um só lugar.
+## Visão geral
+- Experiência visual premium com identidade dourado/preto
+- Conteúdo direto para conversão e agendamento
+- Informações essenciais em um único lugar
 
-## O que você encontra
-- Identidade visual sofisticada em dourado e preto
-- Apresentação dos planos com detalhes e chamada direta para o WhatsApp
-- Seção de agendamento explicando o passo a passo
-- Equipe com perfis personalizados
-- Localização, FAQ e rodapé completo
+## Funcionalidades
+- Seção de planos com detalhes e CTA para WhatsApp
+- Equipe com perfis e imagens
+- Agendamento com passo a passo
+- Localização com mapa
+- FAQ e rodapé completo
 
-## Como ajustar o conteúdo
-- Número do WhatsApp e planos: `src/data/plans.js`
-- Equipe: `src/data/team.js`
-- Perguntas frequentes: `src/data/faq.js`
-- Endereço e mapa: `src/components/Location.jsx`
+## Stack
+- React + Vite
+- Tailwind CSS
 
-## Rodar o projeto
+## Estrutura do projeto
+- `src/components/`: componentes da UI
+- `src/data/`: dados (planos, equipe, FAQ)
+- `src/assets/`: imagens e ícones
+- `public/`: arquivos públicos
+
+## Como rodar localmente
 ```bash
 npm install
 npm run dev
 ```
-Abra `http://localhost:5173`.
+Acesse `http://localhost:5173`.
 
-## Criadores
-- Seu nome — Função/Responsabilidade
-- Outro nome — Função/Responsabilidade
+## Ajustar conteúdo
+- Planos e WhatsApp: `src/data/plans.js`
+- Equipe: `src/data/team.js`
+- FAQ: `src/data/faq.js`
+- Endereço e mapa: `src/components/Location.jsx`
 
-Se quiser, adicione links:
-- Instagram: @usuario
-- GitHub/Portfólio: link
+## Scripts úteis
+- `npm run dev`: ambiente de desenvolvimento
+- `npm run build`: build de produção
+- `npm run preview`: pré-visualização do build
+
+## Autores
+- Kauan Santana — Dev FrontEnd, Designer
+- Lucas Santos — Dev BackEnd
+
+## Contato
+- Instagram: `@sant.dev_`
+- Portfólio: `https://devsantx.vercel.app/`
 
 ## Licença
 Uso interno/cliente. Ajuste conforme necessário.
