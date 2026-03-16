@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Raleway', sans-serif;
+    background: #050505;
+    color: #E5E5E5;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #151515; }
+  ::-webkit-scrollbar-thumb { background: #C9A24A; border-radius: 3px; }
+}
+
+@layer utilities {
+  .gradient-gold {
+    background: linear-gradient(135deg, #59431F 0%, #8E6B2C 25%, #C9A24A 60%, #EAD38F 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-gold-border {
+    border-image: linear-gradient(135deg, #59431F, #C9A24A, #EAD38F) 1;
+  }
+
+  .section-bg {
+    background: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
+  }
+
+  .card-bg {
+    background: linear-gradient(145deg, #1e1e1e 0%, #0d0d0d 100%);
+    border: 1px solid rgba(201, 162, 74, 0.15);
+  }
+
+  .card-bg:hover {
+    border-color: rgba(201, 162, 74, 0.45);
+  }
+
+  .btn-gold {
+    padding: 12px 32px;
+    border: 1.5px solid #C9A24A;
+    color: #C9A24A;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+  .btn-gold:hover {
+    background: #C9A24A;
+    color: #151515;
+  }
+
+  .btn-gold-filled {
+    padding: 12px 32px;
+    background: linear-gradient(135deg, #8E6B2C, #C9A24A);
+    color: #151515;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+  }
+  .btn-gold-filled:hover {
+    background: linear-gradient(135deg, #C9A24A, #EAD38F);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(201,162,74,0.3);
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,162,74,0.4), transparent);
+  }
+}
