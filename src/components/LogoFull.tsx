@@ -1,4 +1,8 @@
-export default function LogoFull({ className = "" }) {
+type LogoFullProps = {
+  className?: string;
+};
+
+export default function LogoFull({ className = "" }: LogoFullProps) {
   return (
     <svg className={className} width="308" height="340" viewBox="0 0 308 340" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>

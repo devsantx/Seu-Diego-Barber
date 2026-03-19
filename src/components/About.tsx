@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { COLORS, FONTS, GRADIENTS } from "../styles/theme";
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: (i = 0) => ({
@@ -20,11 +21,10 @@ export default function About() {
     <section
       id="sobre"
       className="relative py-24 sm:py-32 overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #080808 0%, #111111 50%, #080808 100%)" }}
     >
       <div
         className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-32 hidden lg:block"
-        style={{ background: "linear-gradient(180deg, transparent, #C9A24A, transparent)" }}
+        style={{ background: GRADIENTS.goldLineVertical }}
       />
 
       <div className="max-w-3xl mx-auto px-6">
@@ -37,15 +37,15 @@ export default function About() {
           viewport={{ once: true, amount: 0.3 }}
         >
           <p className="text-[10px] tracking-[0.35em] mb-3"
-            style={{ color: "#8E6B2C", fontFamily: "Raleway, sans-serif" }}>
+            style={{ color: COLORS.goldDark, fontFamily: FONTS.body }}>
             — CONHEÇA A NOSSA HISTÓRIA —
           </p>
           <h2 className="text-xl sm:text-2xl font-bold tracking-widest"
-            style={{ fontFamily: "Cinzel, serif", color: "#E5E5E5" }}>
+            style={{ fontFamily: FONTS.title, color: COLORS.textLight }}>
             SOBRE NOSSA BARBEARIA
           </h2>
           <div className="mx-auto mt-4 w-16 h-[1px]"
-            style={{ background: "linear-gradient(90deg, transparent, #C9A24A, transparent)" }}
+            style={{ background: GRADIENTS.goldLineHorizontal }}
           />
         </motion.div>
 
@@ -53,7 +53,7 @@ export default function About() {
           <motion.p
             key={i}
             className="text-sm leading-relaxed mb-5 text-justify"
-            style={{ color: "#D9D9D9", fontFamily: "Raleway, sans-serif", fontWeight: 400 }}
+            style={{ color: COLORS.textBody, fontFamily: FONTS.body, fontWeight: 400 }}
             variants={fadeUp}
             custom={i * 0.5 + 0.2}
             initial="hidden"

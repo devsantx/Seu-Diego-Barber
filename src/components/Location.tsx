@@ -1,14 +1,33 @@
 import { motion } from "framer-motion";
 import { WHATSAPP_BASE_URL } from "../data/plans";
+import { WA_MESSAGES } from "../data/whatsapp";
+import { COLORS, FONTS, GRADIENTS, RGBA } from "../styles/theme";
 
-const INFO_MSG = encodeURIComponent("Olá! Gostaria de saber o endereço e horários da Seu Diego Barber.");
+// Dados de endereço e contato. Mantenha sincronizado com o Footer.
+const LOCATION_ITEMS = [
+  {
+    icon: "📍",
+    title: "ENDEREÇO",
+    lines: ["Rua Córrego do Bartolomeu, 170 — Morro da Conceição", "Recife — PE, CEP 52280-850"],
+  },
+  {
+    icon: "🕐",
+    title: "HORÁRIOS",
+    lines: ["Seg a Sex: 09h — 20h", "Sábado: 09h — 20h", "Domingo: Fechado"],
+  },
+  {
+    icon: "📱",
+    title: "CONTATO",
+    lines: ["WhatsApp: (81) 98633-3846"],
+    link: `${WHATSAPP_BASE_URL}?text=${WA_MESSAGES.location}`,
+  },
+];
 
 export default function Location() {
   return (
     <section
       id="localizacao"
       className="relative py-24 sm:py-32"
-      style={{ background: "linear-gradient(180deg, #060606 0%, #0f0f0f 100%)" }}
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
@@ -20,15 +39,15 @@ export default function Location() {
           transition={{ duration: 0.7 }}
         >
           <p className="text-[10px] tracking-[0.35em] mb-3"
-            style={{ color: "#8E6B2C", fontFamily: "Raleway, sans-serif" }}>
+            style={{ color: COLORS.goldDark, fontFamily: FONTS.body }}>
             — VENHA NOS VISITAR —
           </p>
           <h2 className="text-xl sm:text-2xl font-bold tracking-widest"
-            style={{ fontFamily: "Cinzel, serif", color: "#E5E5E5" }}>
+            style={{ fontFamily: FONTS.title, color: COLORS.textLight }}>
             LOCALIZAÇÃO
           </h2>
           <div className="mx-auto mt-4 w-16 h-[1px]"
-            style={{ background: "linear-gradient(90deg, transparent, #C9A24A, transparent)" }}
+            style={{ background: GRADIENTS.goldLineHorizontal }}
           />
         </motion.div>
 
@@ -37,7 +56,7 @@ export default function Location() {
           {/* Atualize o src do iframe quando o endereço mudar. */}
           <motion.div
             className="w-full aspect-[4/3] overflow-hidden"
-            style={{ border: "1px solid rgba(201,162,74,0.2)" }}
+            style={{ border: `1px solid ${RGBA.gold(0.2)}` }}
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -63,42 +82,25 @@ export default function Location() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1 }}
           >
-            {[
-              {
-                icon: "📍",
-                title: "ENDEREÇO",
-                lines: ["Rua Córrego do Bartolomeu, 170 — Morro da Conceição", "Recife — PE, CEP 52280-850"],
-              },
-              {
-                icon: "🕐",
-                title: "HORÁRIOS",
-                lines: ["Seg a Sex: 09h — 20h", "Sábado: 09h — 20h", "Domingo: Fechado"],
-              },
-              {
-                icon: "📱",
-                title: "CONTATO",
-                lines: ["WhatsApp: (81) 98633-3846"],
-                link: `${WHATSAPP_BASE_URL}?text=${INFO_MSG}`,
-              },
-            ].map((item, i) => (
-              <div key={i} className="p-4 card-bg">
+            {LOCATION_ITEMS.map((item) => (
+              <div key={item.title} className="p-4 card-bg">
                 <div className="flex items-start gap-3">
                   <span className="text-lg">{item.icon}</span>
                   <div>
                     <h4 className="text-[10px] font-bold tracking-[0.2em] mb-1.5"
-                      style={{ fontFamily: "Cinzel, serif", color: "#C9A24A" }}>
+                      style={{ fontFamily: FONTS.title, color: COLORS.gold }}>
                       {item.title}
                     </h4>
                     {item.lines.map((line, j) => (
                       item.link ? (
                         <a key={j} href={item.link} target="_blank" rel="noopener noreferrer"
                           className="block text-xs hover:underline"
-                          style={{ color: "#D9D9D9", fontFamily: "Raleway, sans-serif" }}>
+                          style={{ color: COLORS.textBody, fontFamily: FONTS.body }}>
                           {line}
                         </a>
                       ) : (
                         <p key={j} className="text-xs"
-                          style={{ color: "#D9D9D9", fontFamily: "Raleway, sans-serif" }}>
+                          style={{ color: COLORS.textBody, fontFamily: FONTS.body }}>
                           {line}
                         </p>
                       )

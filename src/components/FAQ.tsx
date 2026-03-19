@@ -1,8 +1,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { faqs } from "../data/faq";
+import type { FAQItem as FAQItemType } from "../data/types";
+import { COLORS, FONTS, GRADIENTS, RGBA } from "../styles/theme";
 
-function FAQItem({ item, index }) {
+type FAQItemProps = {
+  item: FAQItemType;
+  index: number;
+};
+
+function FAQItem({ item, index }: FAQItemProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -18,12 +25,12 @@ function FAQItem({ item, index }) {
         onClick={() => setOpen(!open)}
       >
         <span className="text-xs font-semibold leading-snug flex-1"
-          style={{ fontFamily: "Raleway, sans-serif", color: open ? "#C9A24A" : "#E5E5E5" }}>
+          style={{ fontFamily: FONTS.body, color: open ? COLORS.gold : COLORS.textLight }}>
           {item.question}
         </span>
         <motion.span
           className="flex-shrink-0 text-base leading-none"
-          style={{ color: "#C9A24A" }}
+          style={{ color: COLORS.gold }}
           animate={{ rotate: open ? 45 : 0 }}
           transition={{ duration: 0.25 }}
         >
@@ -41,9 +48,9 @@ function FAQItem({ item, index }) {
             className="overflow-hidden"
           >
             <div className="px-4 sm:px-5 pb-4 pt-0 border-t"
-              style={{ borderColor: "rgba(201,162,74,0.1)" }}>
+              style={{ borderColor: RGBA.gold(0.1) }}>
               <p className="text-xs leading-relaxed pt-3"
-                style={{ color: "#D9D9D9", fontFamily: "Raleway, sans-serif" }}>
+                style={{ color: COLORS.textBody, fontFamily: FONTS.body }}>
                 {item.answer}
               </p>
             </div>
@@ -59,7 +66,6 @@ export default function FAQ() {
     <section
       id="faq"
       className="relative py-24 sm:py-32"
-      style={{ background: "linear-gradient(180deg, #0a0a0a 0%, #080808 100%)" }}
     >
       <div className="max-w-2xl mx-auto px-4 sm:px-6">
 
@@ -71,15 +77,15 @@ export default function FAQ() {
           transition={{ duration: 0.7 }}
         >
           <p className="text-[10px] tracking-[0.35em] mb-3"
-            style={{ color: "#8E6B2C", fontFamily: "Raleway, sans-serif" }}>
+            style={{ color: COLORS.goldDark, fontFamily: FONTS.body }}>
             — DÚVIDAS FREQUENTES —
           </p>
           <h2 className="text-xl sm:text-2xl font-bold tracking-widest"
-            style={{ fontFamily: "Cinzel, serif", color: "#E5E5E5" }}>
+            style={{ fontFamily: FONTS.title, color: COLORS.textLight }}>
             FAQ
           </h2>
           <div className="mx-auto mt-4 w-16 h-[1px]"
-            style={{ background: "linear-gradient(90deg, transparent, #C9A24A, transparent)" }}
+            style={{ background: GRADIENTS.goldLineHorizontal }}
           />
         </motion.div>
 

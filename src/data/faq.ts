@@ -1,4 +1,6 @@
-export const faqs = [
+import type { FAQItem } from "./types";
+
+export const faqs: FAQItem[] = [
   {
     question: "Como funciona o sistema de planos?",
     answer: "Nossos planos são mensais e garantem um número específico de serviços por mês. Ao assinar, você tem acesso ao agendamento prioritário e benefícios exclusivos conforme o plano escolhido.",

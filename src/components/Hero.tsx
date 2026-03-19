@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import LogoFull from "./LogoFull";
+import { COLORS, FONTS, GRADIENTS } from "../styles/theme";
 
 export default function Hero() {
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -8,11 +9,10 @@ export default function Hero() {
     <section
       id="inicio"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
-      style={{ background: "linear-gradient(160deg, #2a2a2a 0%, #1a1a1a 30%, #0d0d0d 65%, #050505 100%)" }}
     >
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(201,162,74,0.05) 0%, transparent 70%)" }}
+        style={{ background: GRADIENTS.heroRadial }}
       />
 
       {[
@@ -24,7 +24,7 @@ export default function Hero() {
         <motion.div
           key={i}
           className={`absolute hidden md:block w-10 h-10 opacity-25 ${cls}`}
-          style={{ borderColor: "#C9A24A" }}
+          style={{ borderColor: COLORS.gold }}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 0.25, scale: 1 }}
           transition={{ delay: 2.2 + i * 0.05, duration: 0.5 }}
@@ -43,7 +43,7 @@ export default function Hero() {
 
         <motion.div
           className="w-20 h-px"
-          style={{ background: "linear-gradient(90deg, transparent, #C9A24A, transparent)" }}
+          style={{ background: GRADIENTS.goldLineHorizontal }}
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
           transition={{ delay: 2.0, duration: 0.6 }}
@@ -51,7 +51,7 @@ export default function Hero() {
 
         <motion.p
           className="text-[11px] tracking-[0.3em] font-light"
-          style={{ color: "#8E6B2C", fontFamily: "Raleway, sans-serif" }}
+          style={{ color: COLORS.goldDark, fontFamily: FONTS.body }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.05, duration: 0.6 }}
@@ -89,13 +89,13 @@ export default function Hero() {
       >
         <motion.div
           className="w-px h-10"
-          style={{ background: "linear-gradient(180deg, #C9A24A, transparent)" }}
+          style={{ background: GRADIENTS.goldScroll }}
           animate={{ scaleY: [0, 1, 0], originY: 0 }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.3 }}
         />
         <span
           className="text-[9px] tracking-[0.25em] font-light"
-          style={{ color: "#C9A24A", fontFamily: "Raleway, sans-serif" }}
+          style={{ color: COLORS.gold, fontFamily: FONTS.body }}
         >
           SCROLL
         </span>

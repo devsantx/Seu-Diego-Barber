@@ -2,8 +2,9 @@ import DiegoPhoto from "../assets/DIEGO.jpg";
 import ErickPhoto from "../assets/ERICK.jpg";
 import MikaelPhoto from "../assets/MIKAEL.jpg";
 import AndrePhoto from "../assets/ANDRE.jpg";
+import type { TeamMember } from "./types";
 
-export const teamMembers = [
+export const teamMembers: TeamMember[] = [
   {
     id: 1,
     name: "DIEGO MELO",

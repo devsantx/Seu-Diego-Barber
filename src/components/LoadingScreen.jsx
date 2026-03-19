@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import logoFull from '../assets/logo-full.svg'
+import { COLORS, FONTS } from '../styles/theme'
 
 export default function LoadingScreen({ onComplete }) {
   return (
@@ -34,10 +35,10 @@ export default function LoadingScreen({ onComplete }) {
         animate={{ opacity: 0.5 }}
         transition={{ delay: 0.5 }}
         style={{
-          fontFamily: 'Cinzel, serif',
+          fontFamily: FONTS.title,
           fontSize: '0.65rem',
           letterSpacing: '0.3em',
-          color: '#C9A24A',
+          color: COLORS.gold,
           textTransform: 'uppercase',
         }}
       >

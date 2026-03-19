@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { teamMembers } from "../data/team";
+import type { TeamMember } from "../data/types";
+import { COLORS, FONTS, GRADIENTS, RGBA } from "../styles/theme";
 
 const ScissorsIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -10,7 +12,12 @@ const ScissorsIcon = () => (
   </svg>
 );
 
-function TeamCard({ member, index }) {
+type TeamCardProps = {
+  member: TeamMember;
+  index: number;
+};
+
+function TeamCard({ member, index }: TeamCardProps) {
   return (
     <motion.div
       className="card-bg transition-all duration-300 group"
@@ -25,32 +32,32 @@ function TeamCard({ member, index }) {
           className="flex-shrink-0 w-20 h-24 sm:w-24 sm:h-28 flex items-center justify-center overflow-hidden"
           style={{
             background: "linear-gradient(135deg, #1e1e1e, #2a2a2a)",
-            border: "1px solid rgba(201,162,74,0.15)",
+            border: `1px solid ${RGBA.gold(0.15)}`,
           }}
         >
           {member.photo ? (
             <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
           ) : (
             <div className="flex flex-col items-center gap-2 opacity-30">
-              <span style={{ color: "#C9A24A" }}><ScissorsIcon /></span>
+              <span style={{ color: COLORS.gold }}><ScissorsIcon /></span>
             </div>
           )}
         </div>
 
         <div className="flex-1 min-w-0">
           <div className="w-5 h-[2px] mb-3"
-            style={{ background: "linear-gradient(90deg, #8E6B2C, #EAD38F)" }}
+            style={{ background: GRADIENTS.goldIntroBar }}
           />
           <h3 className="text-xs font-bold tracking-widest mb-0.5"
-            style={{ fontFamily: "Cinzel, serif", color: "#C9A24A" }}>
+            style={{ fontFamily: FONTS.title, color: COLORS.gold }}>
             {member.name}
           </h3>
           <p className="text-[10px] tracking-wider mb-2"
-            style={{ color: "#8E6B2C", fontFamily: "Raleway, sans-serif" }}>
+            style={{ color: COLORS.goldDark, fontFamily: FONTS.body }}>
             {member.role}
           </p>
           <p className="text-[11px] leading-relaxed"
-            style={{ color: "#9A9A9A", fontFamily: "Raleway, sans-serif" }}>
+            style={{ color: COLORS.textMuted, fontFamily: FONTS.body }}>
             {member.bio}
           </p>
         </div>
@@ -64,7 +71,6 @@ export default function Team() {
     <section
       id="equipe"
       className="relative py-24 sm:py-32"
-      style={{ background: "linear-gradient(180deg, #0a0a0a 0%, #131313 50%, #0a0a0a 100%)" }}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
 
@@ -76,15 +82,15 @@ export default function Team() {
           transition={{ duration: 0.7 }}
         >
           <p className="text-[10px] tracking-[0.35em] mb-3"
-            style={{ color: "#8E6B2C", fontFamily: "Raleway, sans-serif" }}>
+            style={{ color: COLORS.goldDark, fontFamily: FONTS.body }}>
             — OS PROFISSIONAIS —
           </p>
           <h2 className="text-xl sm:text-2xl font-bold tracking-widest"
-            style={{ fontFamily: "Cinzel, serif", color: "#E5E5E5" }}>
+            style={{ fontFamily: FONTS.title, color: COLORS.textLight }}>
             CONHEÇA NOSSA EQUIPE
           </h2>
           <div className="mt-4 w-16 h-[1px]"
-            style={{ background: "linear-gradient(90deg, #C9A24A, transparent)" }}
+            style={{ background: `linear-gradient(90deg, ${COLORS.gold}, transparent)` }}
           />
         </motion.div>
 

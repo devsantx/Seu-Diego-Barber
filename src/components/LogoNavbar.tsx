@@ -1,4 +1,8 @@
-export default function LogoNavbar({ className = "" }) {
+type LogoNavbarProps = {
+  className?: string;
+};
+
+export default function LogoNavbar({ className = "" }: LogoNavbarProps) {
   return (
     <svg className={className} width="141" height="42" viewBox="0 0 141 42" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>

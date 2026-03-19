@@ -1,3 +1,6 @@
+// Landing page — mantida exatamente como estava.
+// O roteamento e o portal estão em src/router/index.jsx
+
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Intro       from "./components/Intro";

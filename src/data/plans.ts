@@ -1,8 +1,10 @@
 // Número oficial da barbearia (DDI + DDD + número).
+import type { Plan } from "./types";
+
 export const WHATSAPP_NUMBER = "5511999999999";
 export const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 
-export const plans = [
+export const plans: Plan[] = [
   {
     id: 1,
     name: "PLANO ESSENCIAL",

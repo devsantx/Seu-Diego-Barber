@@ -1,11 +1,16 @@
 import { motion } from "framer-motion";
 import LogoFull from "./LogoFull";
+import { COLORS, GRADIENTS, RGBA } from "../styles/theme";
 
-export default function Intro({ onComplete }) {
+type IntroProps = {
+  onComplete?: () => void;
+};
+
+export default function Intro({ onComplete }: IntroProps) {
   return (
     <motion.div
       className="fixed inset-0 z-[9999] flex items-center justify-center"
-      style={{ background: "#050505" }}
+      style={{ background: COLORS.darkest }}
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -14,7 +19,7 @@ export default function Intro({ onComplete }) {
     >
       <motion.div
         className="absolute top-0 left-0 right-0 h-[2px]"
-        style={{ background: "linear-gradient(90deg, transparent, #C9A24A, transparent)" }}
+        style={{ background: GRADIENTS.goldLineHorizontal }}
         initial={{ scaleX: 0, opacity: 0 }}
         animate={{ scaleX: 1, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
@@ -31,14 +36,14 @@ export default function Intro({ onComplete }) {
 
         <motion.div
           className="mt-10 w-32 h-[1px] overflow-hidden"
-          style={{ background: "rgba(201,162,74,0.2)" }}
+          style={{ background: RGBA.gold(0.2) }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
         >
           <motion.div
             className="h-full"
-            style={{ background: "linear-gradient(90deg, #8E6B2C, #EAD38F)" }}
+            style={{ background: GRADIENTS.goldIntroBar }}
             initial={{ x: "-100%" }}
             animate={{ x: "0%" }}
             transition={{ duration: 0.9, delay: 0.6, ease: "easeInOut" }}
@@ -48,7 +53,7 @@ export default function Intro({ onComplete }) {
 
       <motion.div
         className="absolute bottom-0 left-0 right-0 h-[2px]"
-        style={{ background: "linear-gradient(90deg, transparent, #C9A24A, transparent)" }}
+        style={{ background: GRADIENTS.goldLineHorizontal }}
         initial={{ scaleX: 0, opacity: 0 }}
         animate={{ scaleX: 1, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}

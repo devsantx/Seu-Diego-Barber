@@ -6,10 +6,28 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   html { scroll-behavior: smooth; }
+  html, body { min-height: 100%; }
+
+  @keyframes ambientGradient {
+    0% {
+      background-position: 0% 50%, 100% 10%, 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%, 0% 90%, 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%, 100% 10%, 0% 50%;
+    }
+  }
 
   body {
     font-family: 'Raleway', sans-serif;
-    background: #050505;
+    background:
+      radial-gradient(60% 60% at 22% 18%, rgba(201,162,74,0.12) 0%, rgba(201,162,74,0.04) 38%, transparent 62%),
+      radial-gradient(55% 55% at 78% 40%, rgba(255,255,255,0.02) 0%, transparent 60%),
+      linear-gradient(135deg, #040404 0%, #060606 25%, #0b0b0b 55%, #050505 80%, #040404 100%);
+    background-size: 180% 180%, 200% 200%, 420% 420%;
+    animation: ambientGradient 22s ease-in-out infinite;
     color: #E5E5E5;
     overflow-x: hidden;
   }
