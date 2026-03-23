@@ -27,7 +27,7 @@ function CampoInfo({ label, valor }: CampoInfoProps) {
   return (
     <div className="py-2 border-b" style={{ borderColor: RGBA.gold(0.07) }}>
       <p className="text-[9px] font-bold tracking-widest" style={{ color: COLORS.gold, fontFamily: FONTS.title }}>{label}</p>
-      <p className="text-[11px] mt-0.5" style={{ color: COLORS.textBody, fontFamily: FONTS.body }}>{valor ?? "—"}</p>
+      <p className="text-[11px] mt-0.5" style={{ color: "var(--text-body)", fontFamily: FONTS.body }}>{valor ?? "—"}</p>
     </div>
   );
 }
@@ -83,7 +83,7 @@ export default function Perfil() {
   return (
     <div>
       <motion.h1 className="text-2xl font-bold tracking-widest text-center mb-8"
-        style={{ fontFamily: FONTS.title, color: COLORS.textLight }}
+        style={{ fontFamily: FONTS.title, color: "var(--text-primary)" }}
         initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }}>
         PERFIL
       </motion.h1>
@@ -105,12 +105,12 @@ export default function Perfil() {
           <div className="space-y-2 mb-6">
             {ultimosCortes.map((a) => (
               <div key={a.id} className="flex items-center gap-3 p-3"
-                style={{ background: RGBA.white(0.02), border:`1px solid ${RGBA.gold(0.07)}` }}>
+                style={{ background: "var(--bg-input)", border:`1px solid ${RGBA.gold(0.07)}` }}>
                 <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-[10px]"
                   style={{ background: RGBA.green(0.08), border:`1px solid ${RGBA.green(0.15)}`, color: COLORS.accentGreen }}>✓</div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[11px] font-semibold" style={{ color: COLORS.textLight, fontFamily: FONTS.body }}>{a.servico.nome}</p>
-                  <p className="text-[10px]" style={{ color: COLORS.textMutedDark, fontFamily: FONTS.body }}>{fmtData(a.data)} · {a.barbeiro.nome}</p>
+                  <p className="text-[11px] font-semibold" style={{ color: "var(--text-primary)", fontFamily: FONTS.body }}>{a.servico.nome}</p>
+                  <p className="text-[10px]" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>{fmtData(a.data)} · {a.barbeiro.nome}</p>
                 </div>
                 {a.comPlano
                   ? <span className="text-[9px] px-1.5 py-0.5 flex-shrink-0" style={{ background: RGBA.green(0.1), color: COLORS.accentGreen, fontFamily: FONTS.title }}>PLANO</span>
@@ -124,7 +124,7 @@ export default function Perfil() {
             BARBEIRO FAVORITO:
           </p>
           <div className="flex items-start gap-4 p-4"
-            style={{ background: RGBA.white(0.02), border:`1px solid ${RGBA.gold(0.12)}` }}>
+            style={{ background: "var(--bg-input)", border:`1px solid ${RGBA.gold(0.12)}` }}>
             <div className="w-14 h-14 rounded flex items-center justify-center flex-shrink-0"
               style={{ background: RGBA.gold(0.06), border:`1px solid ${RGBA.gold(0.15)}` }}>
               <span className="text-xl opacity-30">✂️</span>
@@ -133,7 +133,7 @@ export default function Perfil() {
               <p className="text-xs font-bold tracking-widest" style={{ color: COLORS.gold, fontFamily: FONTS.title }}>
                 {bTop.toUpperCase()}
               </p>
-              <p className="text-[11px] mt-1 leading-relaxed" style={{ color: COLORS.textBody, fontFamily: FONTS.body }}>
+              <p className="text-[11px] mt-1 leading-relaxed" style={{ color: "var(--text-body)", fontFamily: FONTS.body }}>
                 Você já cortou com <strong style={{ color: COLORS.gold }}>{bTop}</strong>{" "}
                 <strong style={{ color: COLORS.gold }}>{qtd}</strong>{" "}
                 {qtd===1?"vez":"vezes"} e o seu corte preferido é o{" "}
@@ -160,7 +160,7 @@ export default function Perfil() {
             )}
           </div>
 
-          <div className="p-5" style={{ background: RGBA.white(0.02), border:`1px solid ${RGBA.gold(0.1)}` }}>
+          <div className="p-5" style={{ background: "var(--bg-input)", border:`1px solid ${RGBA.gold(0.1)}` }}>
             {/* Foto */}
             <div className="flex justify-center mb-5">
               <div className="relative cursor-pointer group" onClick={() => fotoRef.current?.click()}>
@@ -192,7 +192,7 @@ export default function Perfil() {
                     <input type={c.type} value={form[c.key as keyof FormState]} onChange={e => setForm(f=>({...f,[c.key]:e.target.value}))}
                       placeholder={c.ph}
                       className="w-full px-3 py-2.5 text-[11px] outline-none transition-all"
-                      style={{ background: RGBA.white(0.05), border:`1px solid ${RGBA.gold(0.18)}`, color: COLORS.textLight, fontFamily: FONTS.body }}
+                      style={{ background: "var(--bg-input)", border:`1px solid ${RGBA.gold(0.18)}`, color: "var(--text-primary)", fontFamily: FONTS.body }}
                       onFocus={e=>e.target.style.borderColor = RGBA.gold(0.5)}
                       onBlur={e=>e.target.style.borderColor = RGBA.gold(0.18)}
                     />
@@ -206,7 +206,7 @@ export default function Perfil() {
                   </button>
                   <button onClick={() => setEditando(false)}
                     className="px-4 py-2.5 text-[10px] font-semibold"
-                    style={{ border:`1px solid ${RGBA.gold(0.2)}`, color: COLORS.textMutedDark, fontFamily: FONTS.body }}>
+                    style={{ border:`1px solid ${RGBA.gold(0.2)}`, color: "var(--text-muted)", fontFamily: FONTS.body }}>
                     Cancelar
                   </button>
                 </div>
