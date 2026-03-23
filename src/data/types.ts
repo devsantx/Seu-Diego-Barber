@@ -64,6 +64,16 @@ export interface UltimoAgendamento {
   status: string;
 }
 
+export interface AgendamentoCliente {
+  id: number;
+  data: string;
+  hora: string;
+  barbeiro: { id: number; nome: string };
+  servico: { id: number; nome: string };
+  observacao?: string;
+  status: "agendado" | "concluido" | "cancelado";
+}
+
 export interface HistoricoItem {
   id: number;
   data: string;
