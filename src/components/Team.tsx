@@ -5,10 +5,11 @@ import { COLORS, FONTS, GRADIENTS, RGBA } from "../styles/theme";
 
 const ScissorsIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
-    <line x1="20" y1="4" x2="8.12" y2="15.88"/>
-    <line x1="14.47" y1="14.48" x2="20" y2="20"/>
-    <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+    <circle cx="6" cy="6" r="3" />
+    <circle cx="6" cy="18" r="3" />
+    <line x1="20" y1="4" x2="8.12" y2="15.88" />
+    <line x1="14.47" y1="14.48" x2="20" y2="20" />
+    <line x1="8.12" y1="8.12" x2="12" y2="12" />
   </svg>
 );
 
@@ -28,13 +29,7 @@ function TeamCard({ member, index }: TeamCardProps) {
       whileHover={{ y: -4 }}
     >
       <div className="p-5 flex gap-4 items-start">
-        <div
-          className="flex-shrink-0 w-20 h-24 sm:w-24 sm:h-28 flex items-center justify-center overflow-hidden"
-          style={{
-            background: "linear-gradient(135deg, #1e1e1e, #2a2a2a)",
-            border: `1px solid ${RGBA.gold(0.15)}`,
-          }}
-        >
+        <div className="flex-shrink-0 w-20 h-24 sm:w-24 sm:h-28 flex items-center justify-center overflow-hidden" style={{ background: "linear-gradient(135deg, #1e1e1e, #2a2a2a)", border: `1px solid ${RGBA.gold(0.15)}` }}>
           {member.photo ? (
             <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
           ) : (
@@ -45,19 +40,14 @@ function TeamCard({ member, index }: TeamCardProps) {
         </div>
 
         <div className="flex-1 min-w-0">
-          <div className="w-5 h-[2px] mb-3"
-            style={{ background: GRADIENTS.goldIntroBar }}
-          />
-          <h3 className="text-xs font-bold tracking-widest mb-0.5"
-            style={{ fontFamily: FONTS.title, color: COLORS.gold }}>
+          <div className="w-5 h-[2px] mb-3" style={{ background: GRADIENTS.goldIntroBar }} />
+          <h3 className="text-xs font-bold tracking-widest mb-0.5" style={{ fontFamily: FONTS.title, color: COLORS.gold }}>
             {member.name}
           </h3>
-          <p className="text-[10px] tracking-wider mb-2"
-            style={{ color: COLORS.goldDark, fontFamily: FONTS.body }}>
+          <p className="text-[10px] tracking-wider mb-2" style={{ color: COLORS.goldDeep, fontFamily: FONTS.body }}>
             {member.role}
           </p>
-          <p className="text-[11px] leading-relaxed"
-            style={{ color: COLORS.textMuted, fontFamily: FONTS.body }}>
+          <p className="text-[11px] leading-relaxed" style={{ color: "var(--text-body)", fontFamily: FONTS.body }}>
             {member.bio}
           </p>
         </div>
@@ -68,12 +58,8 @@ function TeamCard({ member, index }: TeamCardProps) {
 
 export default function Team() {
   return (
-    <section
-      id="equipe"
-      className="relative py-24 sm:py-32"
-    >
+    <section id="equipe" className="relative py-24 sm:py-32">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
-
         <motion.div
           className="mb-14"
           initial={{ opacity: 0, y: 30 }}
@@ -81,17 +67,13 @@ export default function Team() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7 }}
         >
-          <p className="text-[10px] tracking-[0.35em] mb-3"
-            style={{ color: COLORS.goldDark, fontFamily: FONTS.body }}>
-            — OS PROFISSIONAIS —
+          <p className="text-[10px] tracking-[0.35em] mb-3" style={{ color: COLORS.goldDeep, fontFamily: FONTS.body }}>
+            OS PROFISSIONAIS
           </p>
-          <h2 className="text-xl sm:text-2xl font-bold tracking-widest"
-            style={{ fontFamily: FONTS.title, color: COLORS.textLight }}>
-            CONHEÇA NOSSA EQUIPE
+          <h2 className="text-xl sm:text-2xl font-bold tracking-widest" style={{ fontFamily: FONTS.title, color: "var(--text-primary)" }}>
+            CONHECA NOSSA EQUIPE
           </h2>
-          <div className="mt-4 w-16 h-[1px]"
-            style={{ background: `linear-gradient(90deg, ${COLORS.gold}, transparent)` }}
-          />
+          <div className="mt-4 w-16 h-[1px]" style={{ background: `linear-gradient(90deg, ${COLORS.gold}, transparent)` }} />
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
