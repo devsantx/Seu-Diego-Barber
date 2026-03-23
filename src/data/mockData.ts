@@ -7,6 +7,7 @@ import type {
   Servico,
   PlanoMock,
   Cliente,
+  AgendamentoCliente,
   HistoricoItem,
   HorarioDisponivel,
   AgendamentoPayload,
@@ -90,6 +91,78 @@ export const mockHistorico: HistoricoItem[] = [
   { id: 5,  data: "2026-02-03", hora: "14:00", barbeiro: { nome: "Mikael" }, servico: { nome: "Corte + Bigode e Sobrancelha" }, valor: 50, comPlano: false },
 ];
 
+const STORAGE_KEY = "sdb_agendamentos";
+
+const mockAgendamentosPorCliente: Record<number, AgendamentoCliente[]> = {
+  1: [
+    {
+      id: 101,
+      data: "2026-03-26",
+      hora: "15:30",
+      barbeiro: { id: 1, nome: "Diego" },
+      servico: { id: 2, nome: "Corte + Barba" },
+      observacao: "Preferência por acabamento mais alinhado na barba.",
+      status: "agendado",
+    },
+    {
+      id: 102,
+      data: "2026-03-29",
+      hora: "10:00",
+      barbeiro: { id: 1, nome: "Diego" },
+      servico: { id: 1, nome: "Corte" },
+      observacao: "",
+      status: "agendado",
+    },
+  ],
+  2: [],
+};
+
+function normalizarAgendamentoCliente(clienteId: number, agendamento: AgendamentoCliente) {
+  return {
+    ...agendamento,
+    status: agendamento.status ?? "agendado",
+    observacao: agendamento.observacao ?? "",
+    barbeiro: agendamento.barbeiro ?? { id: 0, nome: "A definir" },
+    servico: agendamento.servico ?? { id: 0, nome: "Corte" },
+    id: agendamento.id ?? Math.floor(Math.random() * 1000) + clienteId * 100,
+  };
+}
+
+function lerAgendamentosStorage(): Record<number, AgendamentoCliente[]> {
+  if (typeof window === "undefined") return mockAgendamentosPorCliente;
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return mockAgendamentosPorCliente;
+
+  try {
+    const parsed = JSON.parse(raw) as Record<string, AgendamentoCliente[]>;
+    return Object.fromEntries(
+      Object.entries(parsed).map(([clienteId, agendamentos]) => [
+        Number(clienteId),
+        (agendamentos ?? []).map(agendamento =>
+          normalizarAgendamentoCliente(Number(clienteId), agendamento)
+        ),
+      ])
+    );
+  } catch {
+    return mockAgendamentosPorCliente;
+  }
+}
+
+function salvarAgendamentosStorage(data: Record<number, AgendamentoCliente[]>) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+export function fetchAgendamentosCliente(clienteId: number): Promise<AgendamentoCliente[]> {
+  const data = lerAgendamentosStorage();
+  const agendamentos = data[clienteId] ?? mockAgendamentosPorCliente[clienteId] ?? [];
+  return delay(250).then(() =>
+    [...agendamentos].sort((a, b) =>
+      `${a.data}T${a.hora}`.localeCompare(`${b.data}T${b.hora}`)
+    )
+  );
+}
+
 export async function fetchHorariosDisponiveis(barbeiroId: number, data: string): Promise<HorarioDisponivel[]> {
   await delay(300);
   const dia = new Date(data + "T12:00:00").getDay();
@@ -100,7 +173,23 @@ export async function fetchHorariosDisponiveis(barbeiroId: number, data: string)
 
 export async function criarAgendamento(payload: AgendamentoPayload) {
   await delay(600);
-  return { sucesso: true, agendamentoId: Math.floor(Math.random() * 1000) + 100, ...payload };
+  const servico = SERVICOS.find(item => item.id === payload.servicoId) ?? SERVICOS[0];
+  const barbeiro = BARBEIROS.find(item => item.id === payload.barbeiroId) ?? BARBEIROS[0];
+  const novoAgendamento: AgendamentoCliente = {
+    id: Math.floor(Math.random() * 1000) + 100,
+    data: payload.data,
+    hora: payload.hora,
+    barbeiro: { id: barbeiro.id, nome: barbeiro.nome },
+    servico: { id: servico.id, nome: servico.nome },
+    observacao: payload.observacao,
+    status: "agendado",
+  };
+
+  const data = lerAgendamentosStorage();
+  data[payload.clienteId] = [...(data[payload.clienteId] ?? []), novoAgendamento];
+  salvarAgendamentosStorage(data);
+
+  return { sucesso: true, agendamentoId: novoAgendamento.id, ...payload };
 }
 
 // Login: telefone "11111111111" = sem plano, qualquer outro + "1234" = com plano
