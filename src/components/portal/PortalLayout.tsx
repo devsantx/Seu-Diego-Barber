@@ -231,8 +231,35 @@ export default function PortalLayout() {
         )}
       </AnimatePresence>
 
-      <main className="flex-1 pt-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-12">
+      <main className="flex-1 pt-28 pb-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div
+            className="rounded-[28px] p-4 sm:p-5 mb-6"
+            style={{
+              background: "linear-gradient(180deg, color-mix(in srgb, var(--bg-card) 90%, transparent), color-mix(in srgb, var(--bg-section) 60%, transparent))",
+              border: `1px solid ${RGBA.gold(0.1)}`,
+              boxShadow: `0 16px 34px ${RGBA.black(0.08)}`,
+            }}
+          >
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <div>
+                <p className="text-[10px] tracking-[0.24em]" style={{ color: COLORS.goldDeep, fontFamily: FONTS.title }}>
+                  PORTAL DO CLIENTE
+                </p>
+                <p className="text-[12px] mt-1" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>
+                  Visual limpo para acompanhar agenda, plano e historico com mais rapidez.
+                </p>
+              </div>
+              <div className="px-3 py-2 rounded-xl" style={{ background: RGBA.gold(0.07), border: `1px solid ${RGBA.gold(0.12)}` }}>
+                <p className="text-[10px] font-bold tracking-[0.18em]" style={{ color: COLORS.goldDeep, fontFamily: FONTS.title }}>
+                  CLIENTE ATIVO
+                </p>
+                <p className="text-[12px] mt-1" style={{ color: "var(--text-primary)", fontFamily: FONTS.body }}>
+                  {primeiroNome}
+                </p>
+              </div>
+            </div>
+          </div>
           <Outlet />
         </div>
       </main>

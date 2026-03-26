@@ -15,10 +15,9 @@ const fadeUp = {
 };
 
 const STEP_ITEMS = [
-  { num: "1", title: "Acesse sua conta", desc: "Entre na sua area do cliente pelo botao Entrar. Se nao tiver cadastro, criar e rapido e gratuito." },
-  { num: "2", title: "Escolha o dia e horario", desc: "No calendario online veja os dias disponiveis conforme o seu plano e escolha o horario que melhor encaixa na sua rotina." },
-  { num: "3", title: "Confirme o agendamento", desc: "Apos confirmar, a barbearia recebe o pedido pelo WhatsApp e voce acompanha tudo de forma mais pratica." },
-  { num: "4", title: "Apareca e fique na regua", desc: "Chegue no horario e aproveite a experiencia completa. Se precisar cancelar ou remarcar, avise com antecedencia." },
+  { num: "1", title: "Entre na sua area", desc: "Acesse pelo botao Entrar. Se ainda nao tiver cadastro, voce cria sua conta em poucos segundos." },
+  { num: "2", title: "Escolha dia, hora e servico", desc: "No calendario voce visualiza a disponibilidade, seleciona o barbeiro e confirma o que precisa." },
+  { num: "3", title: "Receba o resumo no WhatsApp", desc: "Depois da confirmacao voce segue com tudo organizado e pode tirar duvidas com mais facilidade." },
 ];
 
 const PRIORITY_CARDS = [
@@ -82,11 +81,43 @@ export default function Agendamento() {
           </p>
         </motion.div>
 
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12"
+          variants={fadeUp}
+          custom={0.14}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <div className="p-5 rounded-2xl" style={{ background: "var(--bg-card)", border: `1px solid ${RGBA.gold(0.14)}` }}>
+            <p className="text-[10px] font-bold tracking-[0.24em]" style={{ color: COLORS.goldDeep, fontFamily: FONTS.title }}>
+              IDEAL PARA
+            </p>
+            <p className="text-sm font-bold mt-2" style={{ color: "var(--text-primary)", fontFamily: FONTS.title }}>
+              Quem quer resolver rapido
+            </p>
+            <p className="text-[11px] mt-2 leading-relaxed" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>
+              O fluxo online reduz troca de mensagens, mostra disponibilidade e deixa a confirmacao mais previsivel.
+            </p>
+          </div>
+          <div className="p-5 rounded-2xl" style={{ background: "var(--bg-card)", border: `1px solid ${RGBA.gold(0.14)}` }}>
+            <p className="text-[10px] font-bold tracking-[0.24em]" style={{ color: COLORS.goldDeep, fontFamily: FONTS.title }}>
+              CANAL DE APOIO
+            </p>
+            <p className="text-sm font-bold mt-2" style={{ color: "var(--text-primary)", fontFamily: FONTS.title }}>
+              WhatsApp para duvidas e excecoes
+            </p>
+            <p className="text-[11px] mt-2 leading-relaxed" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>
+              Se voce preferir atendimento direto, o botao do WhatsApp continua disponivel para confirmar detalhes com a equipe.
+            </p>
+          </div>
+        </motion.div>
+
         <motion.h3 className="text-[11px] font-bold tracking-[0.25em] mb-6 text-center" style={{ fontFamily: FONTS.title, color: COLORS.goldDeep }} variants={fadeUp} custom={0.2} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           COMO AGENDAR ONLINE
         </motion.h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-16">
           {STEP_ITEMS.map((item, i) => (
             <motion.div key={i} className="flex gap-4" variants={fadeUp} custom={0.3 + i * 0.1} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
               <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold" style={{ background: RGBA.gold(0.1), border: `1px solid ${RGBA.gold(0.3)}`, color: COLORS.gold, fontFamily: FONTS.title }}>
