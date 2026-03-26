@@ -32,13 +32,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // Restaura sessão salva ao recarregar a página
   useEffect(() => {
-    const t = localStorage.getItem("sdb_token");
-    const c = localStorage.getItem("sdb_cliente");
+    const t = sessionStorage.getItem("sdb_token");
+    const c = sessionStorage.getItem("sdb_cliente");
+    localStorage.removeItem("sdb_token");
+    localStorage.removeItem("sdb_cliente");
     if (t && c) {
       const normalizado = normalizarDatasCliente(JSON.parse(c));
       setToken(t);
       setCliente(normalizado);
-      localStorage.setItem("sdb_cliente", JSON.stringify(normalizado));
+      sessionStorage.setItem("sdb_cliente", JSON.stringify(normalizado));
     }
     setCarregando(false);
   }, []);
@@ -48,8 +50,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     if (res.sucesso) {
       setToken(res.token);
       setCliente(res.cliente);
-      localStorage.setItem("sdb_token", res.token);
-      localStorage.setItem("sdb_cliente", JSON.stringify(res.cliente));
+      sessionStorage.setItem("sdb_token", res.token);
+      sessionStorage.setItem("sdb_cliente", JSON.stringify(res.cliente));
     }
     return res;
   }
@@ -59,16 +61,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
     if (res.sucesso) {
       setToken(res.token);
       setCliente(res.cliente);
-      localStorage.setItem("sdb_token", res.token);
-      localStorage.setItem("sdb_cliente", JSON.stringify(res.cliente));
+      sessionStorage.setItem("sdb_token", res.token);
+      sessionStorage.setItem("sdb_cliente", JSON.stringify(res.cliente));
     }
     return res;
   }
 
   function logout() {
     setToken(null); setCliente(null);
-    localStorage.removeItem("sdb_token");
-    localStorage.removeItem("sdb_cliente");
+    sessionStorage.removeItem("sdb_token");
+    sessionStorage.removeItem("sdb_cliente");
   }
 
   // Atualiza os dados do cliente localmente após edição de perfil
@@ -76,7 +78,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     if (!cliente) return;
     const at = { ...cliente, ...novos } as Cliente;
     setCliente(at);
-    localStorage.setItem("sdb_cliente", JSON.stringify(at));
+    sessionStorage.setItem("sdb_cliente", JSON.stringify(at));
   }
 
   return (

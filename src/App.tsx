@@ -1,18 +1,15 @@
-// Landing page — mantida exatamente como estava.
-// O roteamento e o portal estão em src/router/index.jsx
-
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Intro       from "./components/Intro";
-import Navbar      from "./components/Navbar";
-import Hero        from "./components/Hero";
-import About       from "./components/About";
-import Plans       from "./components/Plans";
+import Intro from "./components/Intro";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Plans from "./components/Plans";
 import Agendamento from "./components/Agendamento";
-import Team        from "./components/Team";
-import Location    from "./components/Location";
-import FAQ         from "./components/FAQ";
-import Footer      from "./components/Footer";
+import Team from "./components/Team";
+import Location from "./components/Location";
+import FAQ from "./components/FAQ";
+import Footer from "./components/Footer";
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
@@ -34,12 +31,12 @@ export default function App() {
     <>
       <AnimatePresence>
         {showIntro && (
-          <motion.div key="intro" className="fixed inset-0 z-[9999] flex items-center justify-center"
-            style={{ background: "#050505" }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }}>
+          <motion.div key="intro" className="fixed inset-0 z-[9999] flex items-center justify-center" style={{ background: "var(--bg-page)" }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }}>
             <Intro />
           </motion.div>
         )}
       </AnimatePresence>
+
       <AnimatePresence>
         {pageReady && (
           <motion.div key="site" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>

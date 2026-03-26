@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import LogoFull from "./LogoFull";
-import { COLORS, GRADIENTS, RGBA } from "../styles/theme";
+import { GRADIENTS, RGBA } from "../styles/theme";
 
 type IntroProps = {
   onComplete?: () => void;
@@ -10,7 +10,7 @@ export default function Intro({ onComplete }: IntroProps) {
   return (
     <motion.div
       className="fixed inset-0 z-[9999] flex items-center justify-center"
-      style={{ background: COLORS.darkest }}
+      style={{ background: "linear-gradient(180deg, color-mix(in srgb, var(--bg-page) 92%, #000), var(--bg-section))" }}
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

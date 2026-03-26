@@ -7,41 +7,45 @@
    ============================================================ */
 :root,
 [data-theme="dark"] {
-  --bg-page:      #060606;
-  --bg-section:   #0d0d0d;
-  --bg-card:      #111111;
-  --bg-card-hover:#1a1a1a;
-  --bg-navbar:    #151515;
-  --bg-input:     rgba(255,255,255,0.04);
+  --bg-page:      #050505;
+  --bg-section:   #0c0c0c;
+  --bg-card:      #121212;
+  --bg-card-hover:#191919;
+  --bg-navbar:    rgba(17, 17, 17, 0.9);
+  --bg-footer:    #16120d;
+  --bg-input:     rgba(255,255,255,0.05);
 
-  --border-gold:  rgba(201,162,74,0.15);
-  --border-gold-hover: rgba(201,162,74,0.45);
+  --border-gold:  rgba(201,162,74,0.16);
+  --border-gold-hover: rgba(201,162,74,0.36);
 
-  --text-primary:  #E5E5E5;
-  --text-body:     #D9D9D9;
-  --text-muted:    #9A9A9A;
-  --text-disabled: #3A3A3A;
+  --text-primary:  #F2EEE7;
+  --text-body:     #DDD6CA;
+  --text-muted:    #A59783;
+  --text-disabled: #5F5648;
 
-  --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-card: 0 18px 40px rgba(0,0,0,0.32);
+  --shadow-card-hover: 0 24px 50px rgba(0,0,0,0.38);
 }
 
 [data-theme="light"] {
-  --bg-page:      #F6F1E7;
-  --bg-section:   #EFE6D7;
-  --bg-card:      #FFFDF9;
-  --bg-card-hover:#FBF4E7;
+  --bg-page:      #F7F2E9;
+  --bg-section:   #EEE5D6;
+  --bg-card:      #FFFCF7;
+  --bg-card-hover:#FAF1E3;
   --bg-navbar:    rgba(255, 250, 242, 0.97);
-  --bg-input:     rgba(67,45,11,0.06);
+  --bg-footer:    #DFCDAF;
+  --bg-input:     rgba(67,45,11,0.05);
 
-  --border-gold:  rgba(107,74,22,0.18);
-  --border-gold-hover: rgba(107,74,22,0.4);
+  --border-gold:  rgba(107,74,22,0.17);
+  --border-gold-hover: rgba(107,74,22,0.3);
 
   --text-primary:  #1E1408;
-  --text-body:     #342312;
-  --text-muted:    #5A4527;
-  --text-disabled: #7E6750;
+  --text-body:     #3A2917;
+  --text-muted:    #695338;
+  --text-disabled: #8C775E;
 
-  --shadow-card: 0 8px 28px rgba(89,67,31,0.1);
+  --shadow-card: 0 14px 34px rgba(89,67,31,0.08);
+  --shadow-card-hover: 0 20px 44px rgba(89,67,31,0.12);
 }
 
 /* ============================================================
@@ -63,17 +67,16 @@
   /* Dark: gradiente ambiente animado */
   [data-theme="dark"] body {
     background:
-      radial-gradient(60% 60% at 22% 18%, rgba(201,162,74,0.10) 0%, rgba(201,162,74,0.03) 38%, transparent 62%),
-      radial-gradient(55% 55% at 78% 40%, rgba(255,255,255,0.015) 0%, transparent 60%),
-      linear-gradient(135deg, #040404 0%, #060606 25%, #0a0a0a 55%, #050505 80%, #040404 100%);
+      radial-gradient(60% 60% at 22% 18%, rgba(201,162,74,0.11) 0%, rgba(201,162,74,0.03) 38%, transparent 62%),
+      radial-gradient(55% 55% at 78% 40%, rgba(255,255,255,0.02) 0%, transparent 60%),
+      linear-gradient(135deg, #030303 0%, #060606 22%, #0b0b0b 56%, #050505 82%, #030303 100%);
   }
 
-  /* Light: gradiente creme suave */
   [data-theme="light"] body {
     background:
       radial-gradient(52% 52% at 18% 16%, rgba(201,162,74,0.08) 0%, transparent 62%),
       radial-gradient(40% 36% at 82% 12%, rgba(107,74,22,0.05) 0%, transparent 70%),
-      linear-gradient(135deg, #FAF6EE 0%, #F3EBDD 48%, #EEE3CF 100%);
+      linear-gradient(135deg, #FCF8F0 0%, #F3EADB 48%, #EBDCC5 100%);
   }
 
   ::-webkit-scrollbar { width: 5px; }
@@ -96,11 +99,14 @@
   .card-bg {
     background: var(--bg-card);
     border: 1px solid var(--border-gold);
-    transition: border-color 0.2s ease, background 0.3s ease;
+    box-shadow: var(--shadow-card);
+    transition: border-color 0.2s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   }
-  .card-bg:hover { border-color: var(--border-gold-hover); }
+  .card-bg:hover {
+    border-color: var(--border-gold-hover);
+    box-shadow: var(--shadow-card-hover);
+  }
 
-  /* Botão outline dourado */
   .btn-gold {
     padding: 12px 32px;
     border: 1.5px solid #C9A24A;
@@ -111,12 +117,15 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     cursor: pointer;
-    background: transparent;
+    background: color-mix(in srgb, var(--bg-card) 82%, transparent);
     transition: all 0.3s ease;
   }
-  .btn-gold:hover { background: #C9A24A; color: #151515; }
+  .btn-gold:hover {
+    background: #C9A24A;
+    color: #151515;
+    box-shadow: 0 10px 24px rgba(201,162,74,0.18);
+  }
 
-  /* Botão filled dourado */
   .btn-gold-filled {
     padding: 12px 32px;
     background: linear-gradient(135deg, #8E6B2C, #C9A24A);
@@ -128,6 +137,7 @@
     text-transform: uppercase;
     cursor: pointer;
     border: none;
+    box-shadow: 0 10px 24px rgba(201,162,74,0.18);
     transition: all 0.3s ease;
   }
   .btn-gold-filled:hover {

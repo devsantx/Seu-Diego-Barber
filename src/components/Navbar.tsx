@@ -64,7 +64,7 @@ export default function Navbar() {
 
   const entrarNoPortal = () => {
     setMenuOpen(false);
-    navigate(cliente ? "/portal" : "/entrar");
+    navigate("/entrar");
   };
 
   const abrirAgendamento = () => {
@@ -128,7 +128,7 @@ export default function Navbar() {
                 e.currentTarget.style.opacity = "1";
               }}
             >
-              {cliente ? "MINHA AREA" : "ENTRAR"}
+              ENTRAR
             </button>
           </div>
 
@@ -235,7 +235,7 @@ export default function Navbar() {
                   className="w-full py-3 text-[11px] font-bold tracking-[0.18em]"
                   style={{ background: GRADIENTS.goldFill, color: COLORS.dark, fontFamily: FONTS.title }}
                 >
-                  {cliente ? "MINHA AREA" : "ENTRAR PARA AGENDAR"}
+                  ENTRAR PARA AGENDAR
                 </button>
               </div>
             </div>

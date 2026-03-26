@@ -138,7 +138,7 @@ export default function Planos() {
       {/* Plano atual */}
       {planoAtual?.ativo ? (
         <motion.div className="p-5 mb-7 relative overflow-hidden rounded-sm"
-          style={{ background: "linear-gradient(135deg, var(--bg-card), rgba(22,18,8,0.7))", border: `1px solid ${RGBA.gold(0.3)}` }}
+          style={{ background: "linear-gradient(135deg, var(--bg-card), color-mix(in srgb, var(--bg-section) 58%, rgba(201,162,74,0.08)))", border: `1px solid ${RGBA.gold(0.3)}` }}
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
           <div className="absolute top-0 right-0 w-40 h-40 rounded-full pointer-events-none"
             style={{ background: `radial-gradient(circle, ${RGBA.gold(0.05)} 0%, transparent 70%)` }} />

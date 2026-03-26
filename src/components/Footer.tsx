@@ -26,7 +26,13 @@ export default function Footer() {
   const waLink = `${WHATSAPP_BASE_URL}?text=${WA_MESSAGES.info}`;
 
   return (
-    <footer style={{ background: COLORS.darkBg, borderTop: `1px solid ${RGBA.gold(0.1)}` }}>
+    <footer
+      style={{
+        background: "linear-gradient(180deg, color-mix(in srgb, var(--bg-footer) 80%, transparent), var(--bg-footer) 22%, color-mix(in srgb, var(--bg-footer) 92%, rgba(201,162,74,0.05)))",
+        borderTop: `1px solid ${RGBA.gold(0.14)}`,
+        boxShadow: `0 -18px 36px ${RGBA.black(0.08)}, inset 0 1px 0 ${RGBA.gold(0.05)}`,
+      }}
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6">
         <motion.div className="flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-8" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <div className="flex flex-col items-center lg:items-start gap-2 flex-shrink-0 w-full lg:w-[170px] lg:self-start">
@@ -34,7 +40,7 @@ export default function Footer() {
               <LogoFull className="w-full h-auto" style={{ transform: "scale(1.3) translate(-18%, -18%)", transformOrigin: "top left" }} />
             </div>
 
-            <p className="text-[11px] leading-relaxed text-center lg:text-left" style={{ color: COLORS.textMutedDarker, fontFamily: FONTS.body }}>
+            <p className="text-[11px] leading-relaxed text-center lg:text-left" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>
               Estilo, tecnica e atendimento personalizado desde 2017.
             </p>
 
@@ -69,12 +75,12 @@ export default function Footer() {
                       key={link.id}
                       onClick={() => scrollTo(link.id)}
                       className="block w-full sm:w-auto text-[11px] transition-colors duration-200 text-center sm:text-left"
-                      style={{ color: COLORS.textMutedDarker, fontFamily: FONTS.body }}
+                      style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}
                       onMouseEnter={e => {
                         e.currentTarget.style.color = COLORS.gold;
                       }}
                       onMouseLeave={e => {
-                        e.currentTarget.style.color = COLORS.textMutedDarker;
+                        e.currentTarget.style.color = "var(--text-muted)";
                       }}
                     >
                       {link.label}
@@ -90,10 +96,10 @@ export default function Footer() {
                 <div className="space-y-2.5">
                   {HORARIOS.map(({ dia, hora, fechado }) => (
                     <div key={dia}>
-                      <p className="text-[11px]" style={{ color: COLORS.textMutedDark, fontFamily: FONTS.body }}>
+                      <p className="text-[11px]" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>
                         {dia}
                       </p>
-                      <p className="text-[11px] font-semibold" style={{ color: fechado ? COLORS.textDisabled : COLORS.textPanel, fontFamily: FONTS.body }}>
+                      <p className="text-[11px] font-semibold" style={{ color: fechado ? "var(--text-disabled)" : "var(--text-body)", fontFamily: FONTS.body }}>
                         {hora}
                       </p>
                     </div>
@@ -108,7 +114,7 @@ export default function Footer() {
               </h4>
               <div className="space-y-3">
                 <div>
-                  <p className="text-[11px]" style={{ color: COLORS.textMutedDark, fontFamily: FONTS.body }}>
+                  <p className="text-[11px]" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>
                     WhatsApp
                   </p>
                   <a
@@ -116,12 +122,12 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[11px] font-semibold transition-colors duration-200"
-                    style={{ color: COLORS.textPanel, fontFamily: FONTS.body }}
+                    style={{ color: "var(--text-body)", fontFamily: FONTS.body }}
                     onMouseEnter={e => {
                       e.currentTarget.style.color = COLORS.gold;
                     }}
                     onMouseLeave={e => {
-                      e.currentTarget.style.color = COLORS.textPanel;
+                      e.currentTarget.style.color = "var(--text-body)";
                     }}
                   >
                     (81) 98633-3846
@@ -129,7 +135,7 @@ export default function Footer() {
                 </div>
 
                 <div>
-                  <p className="text-[11px]" style={{ color: COLORS.textMutedDark, fontFamily: FONTS.body }}>
+                  <p className="text-[11px]" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>
                     Instagram
                   </p>
                   <a
@@ -137,12 +143,12 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[11px] font-semibold transition-colors duration-200"
-                    style={{ color: COLORS.textPanel, fontFamily: FONTS.body }}
+                    style={{ color: "var(--text-body)", fontFamily: FONTS.body }}
                     onMouseEnter={e => {
                       e.currentTarget.style.color = COLORS.gold;
                     }}
                     onMouseLeave={e => {
-                      e.currentTarget.style.color = COLORS.textPanel;
+                      e.currentTarget.style.color = "var(--text-body)";
                     }}
                   >
                     @seudiegobarber
@@ -150,10 +156,10 @@ export default function Footer() {
                 </div>
 
                 <div>
-                  <p className="text-[11px]" style={{ color: COLORS.textMutedDark, fontFamily: FONTS.body }}>
+                  <p className="text-[11px]" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>
                     Endereco
                   </p>
-                  <p className="text-[11px]" style={{ color: COLORS.textPanel, fontFamily: FONTS.body, lineHeight: 1.6 }}>
+                  <p className="text-[11px]" style={{ color: "var(--text-body)", fontFamily: FONTS.body, lineHeight: 1.6 }}>
                     R. Corrego do Bartolomeu, 170
                     <br />
                     Morro da Conceicao - Recife/PE
@@ -166,18 +172,18 @@ export default function Footer() {
       </div>
 
       <div className="px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-3" style={{ borderTop: `1px solid ${RGBA.gold(0.06)}` }}>
-        <p className="text-[10px] text-center sm:text-left" style={{ color: COLORS.textMutedSoft2, fontFamily: FONTS.body }}>
+        <p className="text-[10px] text-center sm:text-left" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>
           © {new Date().getFullYear()} Seu Diego Barber · Todos os direitos reservados.
         </p>
         <button
           onClick={() => scrollTo("inicio")}
           className="text-[10px] tracking-[0.18em] transition-colors duration-200 flex items-center gap-1.5"
-          style={{ color: COLORS.textMutedSoft3, fontFamily: FONTS.title }}
+          style={{ color: "var(--text-muted)", fontFamily: FONTS.title }}
           onMouseEnter={e => {
             e.currentTarget.style.color = COLORS.gold;
           }}
           onMouseLeave={e => {
-            e.currentTarget.style.color = COLORS.textMutedSoft3;
+            e.currentTarget.style.color = "var(--text-muted)";
           }}
         >
           VOLTAR AO TOPO ↑
