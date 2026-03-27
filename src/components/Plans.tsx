@@ -33,10 +33,10 @@ function PlanCard({ plan, index, onSelect }: PlanCardProps) {
       onClick={() => onSelect(plan)}
       style={{ boxShadow: plan.highlight ? `0 0 30px ${RGBA.gold(0.12)}` : "none" }}
     >
-      {plan.highlight && <div className="absolute inset-0 border rounded-sm pointer-events-none" style={{ borderColor: RGBA.gold(0.5) }} />}
+      {plan.highlight && <div className="absolute inset-0 border radius-panel pointer-events-none" style={{ borderColor: RGBA.gold(0.5) }} />}
 
       {plan.badge && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 text-[9px] font-bold tracking-[0.18em] whitespace-nowrap" style={{ background: COLORS.gold, color: COLORS.dark, fontFamily: FONTS.title }}>
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 text-[9px] font-bold tracking-[0.18em] whitespace-nowrap radius-control" style={{ background: COLORS.gold, color: COLORS.dark, fontFamily: FONTS.title }}>
           {plan.badge}
         </div>
       )}
@@ -74,7 +74,7 @@ function PlanCard({ plan, index, onSelect }: PlanCardProps) {
         </div>
 
         <button
-          className="w-full py-2 text-[10px] font-semibold tracking-[0.15em] border transition-all duration-300 mt-auto"
+          className="w-full py-2 text-[10px] font-semibold tracking-[0.15em] border transition-all duration-300 mt-auto radius-control"
           style={{ borderColor: RGBA.gold(0.4), color: COLORS.gold, fontFamily: FONTS.title }}
           onMouseEnter={e => {
             e.currentTarget.style.background = COLORS.gold;

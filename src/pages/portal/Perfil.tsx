@@ -109,7 +109,7 @@ export default function Perfil() {
       </motion.h1>
 
       {ok && (
-        <div className="mb-5 p-3 text-[11px] text-center" style={{ background: RGBA.green(0.07), border: `1px solid ${RGBA.green(0.2)}`, color: COLORS.accentGreen, fontFamily: FONTS.body }}>
+        <div className="mb-5 p-3 text-[11px] text-center radius-control" style={{ background: RGBA.green(0.07), border: `1px solid ${RGBA.green(0.2)}`, color: COLORS.accentGreen, fontFamily: FONTS.body }}>
           ✅ Dados salvos com sucesso!
         </div>
       )}
@@ -121,7 +121,7 @@ export default function Perfil() {
           </p>
           <div className="space-y-2 mb-6">
             {ultimosCortes.map(a => (
-              <div key={a.id} className="flex items-center gap-3 p-3" style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.07)}` }}>
+              <div key={a.id} className="flex items-center gap-3 p-3 radius-card" style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.07)}` }}>
                 <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-[10px]" style={{ background: RGBA.green(0.08), border: `1px solid ${RGBA.green(0.15)}`, color: COLORS.accentGreen }}>
                   ✓
                 </div>
@@ -134,7 +134,7 @@ export default function Perfil() {
                   </p>
                 </div>
                 {a.comPlano ? (
-                  <span className="text-[9px] px-1.5 py-0.5 flex-shrink-0" style={{ background: RGBA.green(0.1), color: COLORS.accentGreen, fontFamily: FONTS.title }}>
+                  <span className="text-[9px] px-1.5 py-0.5 flex-shrink-0 radius-control" style={{ background: RGBA.green(0.1), color: COLORS.accentGreen, fontFamily: FONTS.title }}>
                     PLANO
                   </span>
                 ) : (
@@ -149,8 +149,8 @@ export default function Perfil() {
           <p className="text-[11px] font-bold tracking-widest mb-3" style={{ color: COLORS.gold, fontFamily: FONTS.title }}>
             BARBEIRO FAVORITO:
           </p>
-          <div className="flex items-start gap-4 p-4 mb-6" style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.12)}` }}>
-            <div className="w-14 h-14 rounded flex items-center justify-center flex-shrink-0" style={{ background: RGBA.gold(0.06), border: `1px solid ${RGBA.gold(0.15)}` }}>
+          <div className="flex items-start gap-4 p-4 mb-6 radius-card" style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.12)}` }}>
+            <div className="w-14 h-14 radius-control flex items-center justify-center flex-shrink-0" style={{ background: RGBA.gold(0.06), border: `1px solid ${RGBA.gold(0.15)}` }}>
               <span className="text-xl opacity-30">✂️</span>
             </div>
             <div>
@@ -167,7 +167,7 @@ export default function Perfil() {
             PROXIMO AGENDAMENTO:
           </p>
           <div
-            className="p-4 rounded-sm"
+            className="p-4 radius-card"
             style={{
               background: proximoAgendamento ? "color-mix(in srgb, var(--bg-card) 78%, rgba(201,162,74,0.08))" : "var(--bg-input)",
               border: `1px solid ${proximoAgendamento ? RGBA.gold(0.18) : RGBA.gold(0.12)}`,
@@ -210,7 +210,7 @@ export default function Perfil() {
             {!editando && (
               <button
                 onClick={() => setEditando(true)}
-                className="text-[10px] font-semibold tracking-wider flex items-center gap-1 px-3 py-1.5 transition-all"
+                className="text-[10px] font-semibold tracking-wider flex items-center gap-1 px-3 py-1.5 transition-all radius-control"
                 style={{ border: `1px solid ${RGBA.gold(0.25)}`, color: COLORS.gold, fontFamily: FONTS.body }}
                 onMouseEnter={e => e.currentTarget.style.background = RGBA.gold(0.07)}
                 onMouseLeave={e => e.currentTarget.style.background = "transparent"}
@@ -220,7 +220,7 @@ export default function Perfil() {
             )}
           </div>
 
-          <div className="p-5" style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.1)}` }}>
+          <div className="p-5 radius-panel" style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.1)}` }}>
             <div className="flex justify-center mb-5">
               <div className="relative cursor-pointer group" onClick={() => fotoRef.current?.click()}>
                 <div className="w-20 h-20 rounded-full flex items-center justify-center overflow-hidden" style={{ background: RGBA.gold(0.06), border: `2px solid ${RGBA.gold(0.2)}` }}>
@@ -249,7 +249,7 @@ export default function Perfil() {
                       value={form[c.key as keyof FormState]}
                       onChange={e => setForm(f => ({ ...f, [c.key]: e.target.value }))}
                       placeholder={c.ph}
-                      className="w-full px-3 py-2.5 text-[11px] outline-none transition-all"
+                      className="w-full px-3 py-2.5 text-[11px] outline-none transition-all radius-control"
                       style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.18)}`, color: "var(--text-primary)", fontFamily: FONTS.body }}
                       onFocus={e => e.target.style.borderColor = RGBA.gold(0.5)}
                       onBlur={e => e.target.style.borderColor = RGBA.gold(0.18)}
@@ -257,10 +257,10 @@ export default function Perfil() {
                   </div>
                 ))}
                 <div className="flex gap-2 pt-1">
-                  <button onClick={salvar} disabled={salvando} className="flex-1 py-2.5 text-[10px] font-bold tracking-widest" style={{ background: GRADIENTS.goldFill, color: COLORS.dark, fontFamily: FONTS.title }}>
+                  <button onClick={salvar} disabled={salvando} className="flex-1 py-2.5 text-[10px] font-bold tracking-widest radius-control" style={{ background: GRADIENTS.goldFill, color: COLORS.dark, fontFamily: FONTS.title }}>
                     {salvando ? "SALVANDO..." : "SALVAR"}
                   </button>
-                  <button onClick={() => setEditando(false)} className="px-4 py-2.5 text-[10px] font-semibold" style={{ border: `1px solid ${RGBA.gold(0.2)}`, color: "var(--text-muted)", fontFamily: FONTS.body }}>
+                  <button onClick={() => setEditando(false)} className="px-4 py-2.5 text-[10px] font-semibold radius-control" style={{ border: `1px solid ${RGBA.gold(0.2)}`, color: "var(--text-muted)", fontFamily: FONTS.body }}>
                     Cancelar
                   </button>
                 </div>
