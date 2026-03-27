@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -99,7 +99,7 @@ function PosAgendamentoPopup({
         <div className="absolute inset-0" style={{ background: RGBA.black(0.75), backdropFilter: "blur(6px)" }} />
 
         <motion.div
-          className="relative w-full max-w-md overflow-hidden rounded-2xl"
+          className="relative w-full max-w-md overflow-hidden radius-panel"
           style={{
             background: "linear-gradient(160deg, var(--bg-card), color-mix(in srgb, var(--bg-section) 76%, transparent))",
             border: `1px solid ${RGBA.gold(0.3)}`,
@@ -199,6 +199,33 @@ function PosAgendamentoPopup({
   );
 }
 
+function EtapaCard({ numero, titulo, descricao, ativo }: { numero: string; titulo: string; descricao: string; ativo: boolean }) {
+  return (
+    <div
+      className="p-4 radius-panel"
+      style={{
+        background: ativo ? "color-mix(in srgb, var(--bg-card) 82%, rgba(201,162,74,0.08))" : "var(--bg-card)",
+        border: `1px solid ${ativo ? RGBA.gold(0.24) : RGBA.gold(0.12)}`,
+        boxShadow: ativo ? `0 14px 30px ${RGBA.gold(0.06)}` : `0 10px 24px ${RGBA.black(0.06)}`,
+      }}
+    >
+      <div className="flex items-start gap-3">
+        <div className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold flex-shrink-0" style={{ background: ativo ? GRADIENTS.goldFill : RGBA.gold(0.08), color: ativo ? COLORS.dark : COLORS.gold, fontFamily: FONTS.title }}>
+          {numero}
+        </div>
+        <div>
+          <p className="text-[11px] font-bold tracking-[0.16em]" style={{ color: ativo ? COLORS.gold : "var(--text-primary)", fontFamily: FONTS.title }}>
+            {titulo}
+          </p>
+          <p className="text-[10px] mt-1 leading-relaxed" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>
+            {descricao}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Agendar() {
   const { cliente } = useAuth();
   const navigate = useNavigate();
@@ -228,6 +255,8 @@ export default function Agendar() {
   const [loadResumo, setLoadResumo] = useState(false);
   const [confirmado, setConfirmado] = useState(false);
   const [salvando, setSalvando] = useState(false);
+  const [servicoMenuOpen, setServicoMenuOpen] = useState(false);
+  const servicoMenuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!cliente) return;
@@ -250,6 +279,17 @@ export default function Agendar() {
     });
   }, [dataSel, barbeiroSel]);
 
+  useEffect(() => {
+    function fecharAoClicarFora(event: MouseEvent) {
+      if (!servicoMenuRef.current?.contains(event.target as Node)) {
+        setServicoMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", fecharAoClicarFora);
+    return () => document.removeEventListener("mousedown", fecharAoClicarFora);
+  }, []);
+
   const proximosAgendamentos = useMemo(
     () =>
       agendamentos.filter(item => {
@@ -261,6 +301,8 @@ export default function Agendar() {
 
   const ultimoHistorico = cliente?.ultimoAgendamento ?? mockHistorico[0];
   const diasUltimoCorte = diasDesde(cliente?.ultimoAgendamento?.data ?? mockHistorico[0]?.data);
+  const servicoDetalhado = SERVICOS.find(x => x.nome === servicoSel);
+  const servicoCoberto = Boolean(plano?.ativo && servicoDetalhado?.cobertosPlanos?.includes(plano.id));
 
   function celulasMes(): Array<Date | null> {
     const prim = new Date(mesAtual);
@@ -301,6 +343,7 @@ export default function Agendar() {
     setHorarioSel(null);
     setServicoSel("");
     setObservacao("");
+    setServicoMenuOpen(false);
   }
 
   const podeContinuar = Boolean(dataSel && horarioSel && barbeiroSel && servicoSel);
@@ -325,9 +368,16 @@ export default function Agendar() {
         Area do Cliente - Seu Diego Barber
       </motion.p>
 
+      <motion.div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.04 }}>
+        <EtapaCard numero="1" titulo="ESCOLHA O DIA" descricao="Selecione uma data valida dentro da janela de agendamento." ativo={Boolean(dataSel)} />
+        <EtapaCard numero="2" titulo="DEFINA O HORARIO" descricao="Depois da data, escolha um horario disponivel." ativo={Boolean(horarioSel)} />
+        <EtapaCard numero="3" titulo="BARBEIRO E SERVICO" descricao="Monte o atendimento do jeito que voce realmente precisa." ativo={Boolean(barbeiroSel && servicoSel)} />
+        <EtapaCard numero="4" titulo="CONFIRME O RESUMO" descricao="Revise tudo e envie o pedido com seguranca." ativo={podeContinuar} />
+      </motion.div>
+
       <div className="grid grid-cols-1 xl:grid-cols-[1.15fr_0.85fr] gap-6 mb-8">
         <motion.div
-          className="p-5 rounded-2xl"
+          className="p-5 radius-panel"
           style={{ background: "var(--bg-card)", border: `1px solid ${RGBA.gold(0.15)}` }}
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -343,7 +393,7 @@ export default function Agendar() {
             </div>
             <button
               onClick={() => navigate("/portal")}
-              className="px-4 py-2 text-[10px] font-bold tracking-[0.18em] rounded-sm"
+              className="px-4 py-2 text-[10px] font-bold tracking-[0.18em] radius-control"
               style={{ border: `1px solid ${RGBA.gold(0.25)}`, color: COLORS.gold, fontFamily: FONTS.title }}
             >
               VOLTAR AO INICIO
@@ -357,7 +407,7 @@ export default function Agendar() {
           ) : proximosAgendamentos.length > 0 ? (
             <div className="space-y-3">
               {proximosAgendamentos.slice(0, 3).map(item => (
-                <div key={item.id} className="p-4 rounded-xl" style={{ background: RGBA.gold(0.05), border: `1px solid ${RGBA.gold(0.14)}` }}>
+                <div key={item.id} className="p-4 radius-card" style={{ background: RGBA.gold(0.05), border: `1px solid ${RGBA.gold(0.14)}` }}>
                   <div className="flex items-center justify-between gap-3 flex-wrap">
                     <p className="text-[11px] font-bold tracking-[0.12em]" style={{ color: COLORS.gold, fontFamily: FONTS.title }}>
                       {formatarDataAgendamento(item.data)}
@@ -380,7 +430,7 @@ export default function Agendar() {
               ))}
             </div>
           ) : (
-            <div className="p-4 rounded-xl" style={{ background: RGBA.gold(0.04), border: `1px dashed ${RGBA.gold(0.22)}` }}>
+            <div className="p-4 radius-card" style={{ background: RGBA.gold(0.04), border: `1px dashed ${RGBA.gold(0.22)}` }}>
               <p className="text-[11px] font-semibold" style={{ color: "var(--text-primary)", fontFamily: FONTS.body }}>
                 Nenhum proximo corte marcado.
               </p>
@@ -392,7 +442,7 @@ export default function Agendar() {
         </motion.div>
 
         <motion.div
-          className="p-5 rounded-2xl"
+          className="p-5 radius-panel"
           style={{ background: "var(--bg-card)", border: `1px solid ${RGBA.gold(0.15)}` }}
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -402,13 +452,13 @@ export default function Agendar() {
             RITMO DOS ULTIMOS CORTES
           </p>
           <div className="grid grid-cols-2 gap-3 mb-4">
-            <div className="p-3 rounded-xl" style={{ background: RGBA.gold(0.05), border: `1px solid ${RGBA.gold(0.12)}` }}>
+            <div className="p-3 radius-card" style={{ background: RGBA.gold(0.05), border: `1px solid ${RGBA.gold(0.12)}` }}>
               <p className="text-[9px] tracking-[0.2em]" style={{ color: COLORS.goldDark, fontFamily: FONTS.title }}>ULTIMO CORTE</p>
               <p className="text-[11px] mt-1" style={{ color: "var(--text-primary)", fontFamily: FONTS.body }}>
                 {ultimoHistorico ? formatarDataCurta(ultimoHistorico.data) : "Sem historico"}
               </p>
             </div>
-            <div className="p-3 rounded-xl" style={{ background: RGBA.gold(0.05), border: `1px solid ${RGBA.gold(0.12)}` }}>
+            <div className="p-3 radius-card" style={{ background: RGBA.gold(0.05), border: `1px solid ${RGBA.gold(0.12)}` }}>
               <p className="text-[9px] tracking-[0.2em]" style={{ color: COLORS.goldDark, fontFamily: FONTS.title }}>DIAS DESDE O ULTIMO</p>
               <p className="text-[11px] mt-1" style={{ color: "var(--text-primary)", fontFamily: FONTS.body }}>
                 {diasUltimoCorte ?? "—"} dias
@@ -416,7 +466,7 @@ export default function Agendar() {
             </div>
           </div>
           {ultimoHistorico && (
-            <div className="p-4 rounded-xl" style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.1)}` }}>
+            <div className="p-4 radius-card" style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.1)}` }}>
               <p className="text-[11px] font-semibold" style={{ color: "var(--text-body)", fontFamily: FONTS.body }}>
                 Seu ultimo atendimento foi {formatarDataAgendamento(ultimoHistorico.data)} as {ultimoHistorico.hora}.
               </p>
@@ -435,12 +485,12 @@ export default function Agendar() {
           </p>
 
           {!plano?.ativo && (
-            <div className="mb-3 p-2.5 text-[10px] card-bg rounded-xl" style={{ color: COLORS.goldDark, fontFamily: FONTS.body }}>
+            <div className="mb-3 p-2.5 text-[10px] card-bg radius-card" style={{ color: COLORS.goldDark, fontFamily: FONTS.body }}>
               Sem plano: agenda aberta ate o sabado desta semana.
             </div>
           )}
 
-          <div className="p-3 card-bg rounded-2xl">
+          <div className="p-3 card-bg radius-panel">
             <div className="flex items-center justify-between mb-2">
               <button
                 onClick={() => setMesAtual(new Date(mesAtual.getFullYear(), mesAtual.getMonth() - 1, 1))}
@@ -480,7 +530,7 @@ export default function Agendar() {
                     key={i}
                     disabled={!ok}
                     onClick={() => setDataSel(data)}
-                    className="aspect-square flex items-center justify-center text-[11px] font-medium rounded-sm transition-all"
+                    className="aspect-square flex items-center justify-center text-[11px] font-medium radius-control transition-all"
                     style={{
                       background: sel ? COLORS.gold : ok ? RGBA.gold(0.04) : "transparent",
                       color: sel ? COLORS.dark : ok ? "var(--text-primary)" : "var(--text-disabled)",
@@ -500,7 +550,7 @@ export default function Agendar() {
           <p className="text-[11px] font-bold tracking-widest mt-4 mb-2" style={{ color: COLORS.gold, fontFamily: FONTS.title }}>
             HORARIOS DISPONIVEIS:
           </p>
-          <div className="p-3 card-bg rounded-2xl" style={{ minHeight: "72px" }}>
+          <div className="p-3 card-bg radius-panel" style={{ minHeight: "72px" }}>
             {!dataSel ? (
               <p className="text-[10px] text-center py-3" style={{ color: "var(--text-disabled)", fontFamily: FONTS.body }}>
                 Selecione uma data acima
@@ -516,7 +566,7 @@ export default function Agendar() {
                     key={hora}
                     disabled={!disponivel}
                     onClick={() => setHorarioSel(hora)}
-                    className="py-1.5 text-[10px] font-semibold rounded-sm transition-all"
+                    className="py-1.5 text-[10px] font-semibold radius-control transition-all"
                     style={{
                       background: horarioSel === hora ? COLORS.gold : disponivel ? RGBA.gold(0.05) : "transparent",
                       color: horarioSel === hora ? COLORS.dark : disponivel ? "var(--text-primary)" : "var(--text-disabled)",
@@ -547,7 +597,7 @@ export default function Agendar() {
                   <button
                     key={b.id}
                     onClick={() => setBarbeiroSel(b)}
-                    className="py-2.5 text-[10px] font-bold tracking-wider transition-all relative rounded-sm"
+                    className="py-2.5 text-[10px] font-bold tracking-wider transition-all relative radius-control"
                     style={{
                       background: sel ? RGBA.gold(0.15) : "var(--bg-input)",
                       border: sel ? `1px solid ${RGBA.gold(0.5)}` : `1px solid ${RGBA.gold(0.12)}`,
@@ -573,31 +623,102 @@ export default function Agendar() {
             <p className="text-[11px] font-bold tracking-widest mb-2" style={{ color: COLORS.gold, fontFamily: FONTS.title }}>
               SERVICO DESEJADO:
             </p>
-            <div className="relative">
-              <select
-                value={servicoSel}
-                onChange={e => setServicoSel(e.target.value)}
-                className="w-full px-4 py-3 text-[11px] font-semibold tracking-widest outline-none appearance-none cursor-pointer rounded-sm"
-                style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.2)}`, color: servicoSel ? "var(--text-primary)" : "var(--text-muted)", fontFamily: FONTS.title }}
+            <div ref={servicoMenuRef} className="relative">
+              <button
+                type="button"
+                onClick={() => setServicoMenuOpen(valor => !valor)}
+                className="w-full px-4 py-3 text-left text-[11px] font-semibold tracking-widest outline-none transition-all radius-control"
+                style={{
+                  background: "linear-gradient(180deg, color-mix(in srgb, var(--bg-card) 96%, transparent), color-mix(in srgb, var(--bg-section) 68%, transparent))",
+                  border: `1px solid ${servicoMenuOpen ? RGBA.gold(0.42) : RGBA.gold(0.24)}`,
+                  color: servicoSel ? "var(--text-primary)" : "var(--text-muted)",
+                  fontFamily: FONTS.title,
+                  boxShadow: servicoMenuOpen ? `0 16px 34px ${RGBA.black(0.18)}` : "none",
+                }}
               >
-                <option value="" disabled>SELECIONE O CORTE</option>
-                {SERVICOS.map(s => {
-                  const coberto = plano?.ativo && s.cobertosPlanos?.includes(plano.id);
-                  return <option key={s.id} value={s.nome}>{s.nome} - {coberto ? "COBERTO PELO PLANO" : `R$ ${s.preco}`}</option>;
-                })}
-              </select>
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[10px]" style={{ color: COLORS.gold }}>▼</div>
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p>{servicoSel || "SELECIONE O CORTE"}</p>
+                    <p className="text-[9px] mt-1 tracking-[0.18em]" style={{ color: servicoSel ? COLORS.goldDark : "var(--text-disabled)", fontFamily: FONTS.body }}>
+                      {servicoSel
+                        ? servicoCoberto
+                          ? "COBERTO PELO PLANO"
+                          : `INVESTIMENTO DE R$ ${servicoDetalhado?.preco}`
+                        : "TOQUE PARA VER AS OPCOES"}
+                    </p>
+                  </div>
+                  <span className="text-sm transition-transform" style={{ color: COLORS.gold, transform: servicoMenuOpen ? "rotate(180deg)" : "rotate(0deg)" }}>
+                    V
+                  </span>
+                </div>
+              </button>
+
+              {servicoMenuOpen && (
+                <div
+                  className="absolute left-0 right-0 top-[calc(100%+10px)] z-20 p-2 radius-card"
+                  style={{
+                    background: "linear-gradient(180deg, color-mix(in srgb, var(--bg-card) 98%, transparent), color-mix(in srgb, var(--bg-section) 84%, transparent))",
+                    border: `1px solid ${RGBA.gold(0.18)}`,
+                    boxShadow: `0 24px 48px ${RGBA.black(0.28)}`,
+                    backdropFilter: "blur(14px)",
+                  }}
+                >
+                  <div className="max-h-72 overflow-y-auto pr-1 space-y-2">
+                    {SERVICOS.map(s => {
+                      const coberto = plano?.ativo && s.cobertosPlanos?.includes(plano.id);
+                      const ativo = servicoSel === s.nome;
+
+                      return (
+                        <button
+                          key={s.id}
+                          type="button"
+                          onClick={() => {
+                            setServicoSel(s.nome);
+                            setServicoMenuOpen(false);
+                          }}
+                          className="w-full p-3 text-left transition-all radius-card"
+                          style={{
+                            background: ativo
+                              ? "linear-gradient(135deg, color-mix(in srgb, rgba(201,162,74,0.22) 72%, var(--bg-card)), color-mix(in srgb, rgba(201,162,74,0.12) 60%, var(--bg-section)))"
+                              : "color-mix(in srgb, var(--bg-card) 92%, transparent)",
+                            border: `1px solid ${ativo ? RGBA.gold(0.34) : RGBA.gold(0.1)}`,
+                          }}
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div>
+                              <p className="text-[11px] font-bold tracking-[0.12em]" style={{ color: ativo ? COLORS.gold : "var(--text-primary)", fontFamily: FONTS.title }}>
+                                {s.nome}
+                              </p>
+                              <p className="text-[10px] mt-1" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>
+                                Duracao aproximada: {s.duracao} min
+                              </p>
+                            </div>
+                            <span
+                              className="px-2 py-1 text-[9px] tracking-[0.16em] radius-control"
+                              style={{
+                                background: coberto ? RGBA.green(0.12) : RGBA.gold(0.08),
+                                color: coberto ? COLORS.accentGreen : COLORS.gold,
+                                fontFamily: FONTS.title,
+                              }}
+                            >
+                              {coberto ? "PLANO" : `R$ ${s.preco}`}
+                            </span>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
             {servicoSel && (() => {
-              const s = SERVICOS.find(x => x.nome === servicoSel);
-              const coberto = plano?.ativo && s?.cobertosPlanos?.includes(plano.id);
               return (
                 <div className="mt-1.5 flex items-center gap-2 flex-wrap">
-                  <span className="text-[9px] px-2 py-0.5 tracking-widest" style={{ background: coberto ? RGBA.green(0.1) : RGBA.gold(0.08), color: coberto ? COLORS.accentGreen : COLORS.gold, fontFamily: FONTS.title }}>
-                    {coberto ? "COBERTO PELO PLANO" : `R$ ${s?.preco}`}
+                  <span className="text-[9px] px-2 py-0.5 tracking-widest" style={{ background: servicoCoberto ? RGBA.green(0.1) : RGBA.gold(0.08), color: servicoCoberto ? COLORS.accentGreen : COLORS.gold, fontFamily: FONTS.title }}>
+                    {servicoCoberto ? "COBERTO PELO PLANO" : `R$ ${servicoDetalhado?.preco}`}
                   </span>
                   <span className="text-[10px]" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>
-                    Duracao aproximada: {s?.duracao} min
+                    Duracao aproximada: {servicoDetalhado?.duracao} min
                   </span>
                 </div>
               );
@@ -613,7 +734,7 @@ export default function Agendar() {
               onChange={e => setObservacao(e.target.value)}
               rows={3}
               placeholder="Ex: quero o degrade mais fechado, prefiro barba mais alinhada..."
-              className="w-full px-4 py-3 text-[11px] outline-none resize-none transition-all rounded-sm"
+              className="w-full px-4 py-3 text-[11px] outline-none resize-none transition-all radius-control"
               style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.12)}`, color: "var(--text-body)", fontFamily: FONTS.body }}
               onFocus={e => {
                 e.target.style.borderColor = RGBA.gold(0.4);
@@ -627,29 +748,32 @@ export default function Agendar() {
             </p>
           </div>
 
-          {podeContinuar && (
-            <motion.div className="p-4 card-bg rounded-2xl" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-              <p className="text-[10px] font-bold tracking-widest mb-2" style={{ color: COLORS.goldDark, fontFamily: FONTS.title }}>
+          <motion.div className="p-4 radius-panel" style={{ background: "linear-gradient(180deg, color-mix(in srgb, var(--bg-card) 96%, transparent), color-mix(in srgb, var(--bg-section) 60%, transparent))", border: `1px solid ${RGBA.gold(0.14)}`, boxShadow: `0 16px 32px ${RGBA.black(0.08)}` }} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+            <div className="flex items-center justify-between gap-3 mb-2">
+              <p className="text-[10px] font-bold tracking-widest" style={{ color: COLORS.goldDark, fontFamily: FONTS.title }}>
                 RESUMO DO AGENDAMENTO
               </p>
-              {[
-                { l: "DATA", v: dataSel?.toLocaleDateString("pt-BR", { weekday: "short", day: "numeric", month: "short" }) },
-                { l: "HORARIO", v: horarioSel },
-                { l: "BARBEIRO", v: barbeiroSel?.nome },
-                { l: "SERVICO", v: servicoSel },
-              ].map(({ l, v }) => (
-                <div key={l} className="flex justify-between py-1 border-b" style={{ borderColor: RGBA.gold(0.06) }}>
-                  <span className="text-[10px]" style={{ color: "var(--text-muted)", fontFamily: FONTS.title }}>{l}</span>
-                  <span className="text-[10px] font-semibold text-right" style={{ color: "var(--text-primary)", fontFamily: FONTS.body }}>{v}</span>
-                </div>
-              ))}
-            </motion.div>
-          )}
+              <span className="text-[9px] px-2 py-1 rounded-full" style={{ background: podeContinuar ? RGBA.green(0.1) : RGBA.gold(0.08), color: podeContinuar ? COLORS.accentGreen : COLORS.gold, fontFamily: FONTS.title }}>
+                {podeContinuar ? "PRONTO PARA ENVIAR" : "PREENCHA AS ETAPAS"}
+              </span>
+            </div>
+            {[
+              { l: "DATA", v: dataSel?.toLocaleDateString("pt-BR", { weekday: "short", day: "numeric", month: "short" }) ?? "Selecione uma data" },
+              { l: "HORARIO", v: horarioSel ?? "Selecione um horario" },
+              { l: "BARBEIRO", v: barbeiroSel?.nome ?? "Escolha um barbeiro" },
+              { l: "SERVICO", v: servicoSel || "Escolha um servico" },
+            ].map(({ l, v }) => (
+              <div key={l} className="flex justify-between py-1.5 border-b" style={{ borderColor: RGBA.gold(0.06) }}>
+                <span className="text-[10px]" style={{ color: "var(--text-muted)", fontFamily: FONTS.title }}>{l}</span>
+                <span className="text-[10px] font-semibold text-right" style={{ color: "var(--text-primary)", fontFamily: FONTS.body }}>{v}</span>
+              </div>
+            ))}
+          </motion.div>
 
           <button
             disabled={!podeContinuar || salvando}
             onClick={confirmar}
-            className="w-full py-3.5 text-[11px] font-bold tracking-[0.2em] transition-all duration-300 rounded-sm"
+            className="w-full py-3.5 text-[11px] font-bold tracking-[0.2em] transition-all duration-300 radius-control"
             style={{
               background: podeContinuar ? GRADIENTS.goldFill : "var(--bg-card)",
               color: podeContinuar ? COLORS.dark : "var(--text-disabled)",

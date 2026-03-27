@@ -54,7 +54,7 @@ function InfoLinha({ label, valor }: { label: string; valor?: string | null }) {
 function ResumoCard({ label, valor, detalhe }: { label: string; valor: string; detalhe: string }) {
   return (
     <div
-      className="p-4 rounded-2xl"
+      className="p-4 radius-panel"
       style={{
         background: "linear-gradient(180deg, color-mix(in srgb, var(--bg-card) 94%, transparent), color-mix(in srgb, var(--bg-section) 58%, transparent))",
         border: `1px solid ${RGBA.gold(0.12)}`,
@@ -163,7 +163,7 @@ export default function Dashboard() {
         transition={{ delay: 0.1 }}
       >
         <div
-          className="relative p-5 rounded-2xl"
+          className="relative p-5 radius-panel"
           style={{
             background: "linear-gradient(180deg, var(--bg-card), color-mix(in srgb, var(--bg-section) 65%, transparent))",
             border: `1px solid ${RGBA.gold(0.15)}`,
@@ -226,7 +226,7 @@ export default function Dashboard() {
 
         <div className="space-y-4">
           <div
-            className="p-6 rounded-2xl relative overflow-hidden"
+            className="p-6 radius-panel relative overflow-hidden"
             style={{
               background: "linear-gradient(135deg, color-mix(in srgb, var(--bg-card) 92%, transparent), color-mix(in srgb, var(--bg-section) 70%, rgba(201,162,74,0.1)))",
               border: `1px solid ${RGBA.gold(0.22)}`,
@@ -262,7 +262,7 @@ export default function Dashboard() {
           </div>
 
           <div className="grid lg:grid-cols-[1.12fr_0.88fr] gap-4">
-            <div className="p-5 rounded-2xl relative overflow-hidden" style={{ background: "linear-gradient(135deg, var(--bg-card) 60%, color-mix(in srgb, var(--bg-section) 52%, rgba(201,162,74,0.08)))", border: `1px solid ${RGBA.gold(0.2)}` }}>
+            <div className="p-5 radius-panel relative overflow-hidden" style={{ background: "linear-gradient(135deg, var(--bg-card) 60%, color-mix(in srgb, var(--bg-section) 52%, rgba(201,162,74,0.08)))", border: `1px solid ${RGBA.gold(0.2)}` }}>
               <div className="absolute top-0 right-0 w-36 h-36 rounded-full pointer-events-none" style={{ background: `radial-gradient(circle, ${RGBA.gold(0.06)} 0%, transparent 70%)` }} />
 
               <div className="flex items-center justify-between gap-4">
@@ -321,7 +321,7 @@ export default function Dashboard() {
               )}
             </div>
 
-            <div className="p-5 rounded-2xl" style={{ background: "var(--bg-card)", border: `1px solid ${RGBA.gold(0.15)}` }}>
+            <div className="p-5 radius-panel" style={{ background: "var(--bg-card)", border: `1px solid ${RGBA.gold(0.15)}` }}>
               <p className="text-[10px] font-bold tracking-[0.28em] mb-3" style={{ color: COLORS.goldDeep, fontFamily: FONTS.title }}>
                 ULTIMO AGENDAMENTO
               </p>
@@ -331,7 +331,7 @@ export default function Dashboard() {
                     Seu ultimo agendamento foi no dia <strong style={{ color: COLORS.goldDeep }}>{formatarData(ultimo.data)}</strong> as <strong style={{ color: COLORS.goldDeep }}>{ultimo.hora}</strong> com{" "}
                     <strong style={{ color: COLORS.goldDeep }}>{ultimo.barbeiro.nome.split(" ")[0]}</strong> - {ultimo.servico.nome}.
                   </p>
-                  <div className="mt-3 p-3 rounded-sm flex items-start gap-2" style={{ background: RGBA.gold(0.05), border: `1px solid ${RGBA.gold(0.12)}` }}>
+                  <div className="mt-3 p-3 radius-control flex items-start gap-2" style={{ background: RGBA.gold(0.05), border: `1px solid ${RGBA.gold(0.12)}` }}>
                     <span className="text-sm flex-shrink-0">💈</span>
                     <p className="text-[11px]" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>
                       <strong style={{ color: COLORS.goldDeep }}>Lembrete do corte anterior:</strong> {ultimo.servico.nome} com {ultimo.barbeiro.nome.split(" ")[0]} em {formatarDataCompleta(ultimo.data)}.
@@ -349,7 +349,7 @@ export default function Dashboard() {
       </motion.div>
 
       <motion.div
-        className="p-6 rounded-2xl mt-4"
+        className="p-6 radius-panel mt-4"
         style={{ background: "var(--bg-card)", border: `1px solid ${RGBA.gold(0.16)}`, boxShadow: `0 18px 36px ${RGBA.black(0.12)}` }}
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -364,7 +364,7 @@ export default function Dashboard() {
               Aqui ficam seus horarios confirmados. O objetivo e bater o olho e entender data, hora, servico e barbeiro sem esforco.
             </p>
           </div>
-          <button onClick={() => navigate("/portal/agendar")} className="px-5 py-2.5 text-[10px] font-bold tracking-[0.18em] rounded-sm" style={{ background: GRADIENTS.goldFill, color: COLORS.dark, fontFamily: FONTS.title }}>
+          <button onClick={() => navigate("/portal/agendar")} className="px-5 py-2.5 text-[10px] font-bold tracking-[0.18em] radius-control" style={{ background: GRADIENTS.goldFill, color: COLORS.dark, fontFamily: FONTS.title }}>
             VER AGENDA
           </button>
         </div>
@@ -376,7 +376,7 @@ export default function Dashboard() {
         ) : proximosAgendamentos.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {proximosAgendamentos.slice(0, 2).map(item => (
-              <div key={item.id} className="p-4 rounded-xl" style={{ background: RGBA.gold(0.06), border: `1px solid ${RGBA.gold(0.14)}` }}>
+              <div key={item.id} className="p-4 radius-card" style={{ background: RGBA.gold(0.06), border: `1px solid ${RGBA.gold(0.14)}` }}>
                 <div className="flex items-center justify-between gap-3 flex-wrap">
                   <p className="text-[11px] font-bold tracking-[0.18em]" style={{ color: COLORS.gold, fontFamily: FONTS.title }}>
                     {formatarDataCompleta(item.data)}
@@ -415,7 +415,7 @@ export default function Dashboard() {
             ))}
           </div>
         ) : (
-          <div className="p-4 rounded-xl" style={{ background: "var(--bg-input)", border: `1px dashed ${RGBA.gold(0.24)}` }}>
+          <div className="p-4 radius-card" style={{ background: "var(--bg-input)", border: `1px dashed ${RGBA.gold(0.24)}` }}>
             <p className="text-[11px] font-semibold" style={{ color: "var(--text-primary)", fontFamily: FONTS.body }}>
               Nenhum horario futuro marcado.
             </p>

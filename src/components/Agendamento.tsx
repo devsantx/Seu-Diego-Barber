@@ -66,7 +66,7 @@ export default function Agendamento() {
         </motion.div>
 
         <motion.div className="text-center mb-10 max-w-2xl mx-auto" variants={fadeUp} custom={0.1} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-5 rounded-sm" style={{ background: RGBA.gold(0.07), border: `1px solid ${RGBA.gold(0.2)}` }}>
+          <div className="inline-flex items-center gap-2 px-4 py-2 mb-5 radius-control" style={{ background: RGBA.gold(0.07), border: `1px solid ${RGBA.gold(0.2)}` }}>
             <span style={{ color: COLORS.gold }}>💻</span>
             <span className="text-[11px] font-semibold tracking-widest" style={{ color: COLORS.gold, fontFamily: FONTS.title }}>
               SISTEMA DE AGENDAMENTO ONLINE
@@ -89,7 +89,7 @@ export default function Agendamento() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <div className="p-5 rounded-2xl" style={{ background: "var(--bg-card)", border: `1px solid ${RGBA.gold(0.14)}` }}>
+          <div className="p-5 radius-panel" style={{ background: "var(--bg-card)", border: `1px solid ${RGBA.gold(0.14)}` }}>
             <p className="text-[10px] font-bold tracking-[0.24em]" style={{ color: COLORS.goldDeep, fontFamily: FONTS.title }}>
               IDEAL PARA
             </p>
@@ -100,7 +100,7 @@ export default function Agendamento() {
               O fluxo online reduz troca de mensagens, mostra disponibilidade e deixa a confirmacao mais previsivel.
             </p>
           </div>
-          <div className="p-5 rounded-2xl" style={{ background: "var(--bg-card)", border: `1px solid ${RGBA.gold(0.14)}` }}>
+          <div className="p-5 radius-panel" style={{ background: "var(--bg-card)", border: `1px solid ${RGBA.gold(0.14)}` }}>
             <p className="text-[10px] font-bold tracking-[0.24em]" style={{ color: COLORS.goldDeep, fontFamily: FONTS.title }}>
               CANAL DE APOIO
             </p>
@@ -176,7 +176,7 @@ export default function Agendamento() {
           ))}
         </div>
 
-        <motion.div className="p-5 rounded-sm mb-12 flex items-start gap-3" style={{ background: RGBA.gold(0.05), border: `1px solid ${RGBA.gold(0.18)}` }} variants={fadeUp} custom={0.5} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        <motion.div className="p-5 radius-control mb-12 flex items-start gap-3" style={{ background: RGBA.gold(0.05), border: `1px solid ${RGBA.gold(0.18)}` }} variants={fadeUp} custom={0.5} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           <span className="text-lg flex-shrink-0">⚠️</span>
           <p className="text-[11px] leading-relaxed" style={{ color: "var(--text-body)", fontFamily: FONTS.body }}>
             <strong style={{ color: COLORS.gold }}>Importante:</strong> horarios nao confirmados podem ser redistribuidos. Caso precise cancelar ou remarcar, avise com antecedencia. A barbearia funciona de <strong style={{ color: COLORS.gold }}>segunda a sabado</strong>.

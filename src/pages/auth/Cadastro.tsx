@@ -69,7 +69,7 @@ export default function Cadastro() {
       </motion.div>
 
       <motion.div
-        className="w-full max-w-[380px] overflow-hidden rounded-2xl"
+        className="w-full max-w-[380px] overflow-hidden radius-panel"
         style={{
           background: "linear-gradient(160deg, var(--bg-card), color-mix(in srgb, var(--bg-section) 78%, transparent))",
           border: `1px solid ${RGBA.gold(0.25)}`,
@@ -98,7 +98,7 @@ export default function Cadastro() {
                 value={f.val}
                 onChange={e => f.fn(e.target.value)}
                 placeholder={f.placeholder}
-                className="w-full px-4 py-3.5 text-sm outline-none transition-all duration-200 rounded-sm"
+                className="w-full px-4 py-3.5 text-sm outline-none transition-all duration-200 radius-control"
                 style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.2)}`, color: "var(--text-primary)", fontFamily: FONTS.body }}
                 onFocus={e => {
                   e.target.style.borderColor = RGBA.gold(0.55);
@@ -110,7 +110,7 @@ export default function Cadastro() {
             ))}
 
             {erro && (
-              <p className="text-[11px] text-center py-2 px-3 rounded-sm" style={{ color: COLORS.accentRed, background: RGBA.red(0.07), fontFamily: FONTS.body }}>
+              <p className="text-[11px] text-center py-2 px-3 radius-control" style={{ color: COLORS.accentRed, background: RGBA.red(0.07), fontFamily: FONTS.body }}>
                 {erro}
               </p>
             )}
@@ -118,7 +118,7 @@ export default function Cadastro() {
             <button
               type="submit"
               disabled={load}
-              className="w-full py-3.5 text-[11px] font-bold tracking-[0.22em] mt-1 transition-all rounded-sm"
+              className="w-full py-3.5 text-[11px] font-bold tracking-[0.22em] mt-1 transition-all radius-control"
               style={{ background: load ? RGBA.gold(0.4) : GRADIENTS.goldFill, color: COLORS.dark, fontFamily: FONTS.title }}
             >
               {load ? "CRIANDO..." : "CRIAR CONTA"}

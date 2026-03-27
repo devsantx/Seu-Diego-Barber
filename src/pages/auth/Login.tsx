@@ -69,7 +69,7 @@ export default function Login() {
       </motion.div>
 
       <motion.div
-        className="w-full max-w-[380px] overflow-hidden rounded-2xl"
+        className="w-full max-w-[380px] overflow-hidden radius-panel"
         style={{
           background: "linear-gradient(160deg, var(--bg-card), color-mix(in srgb, var(--bg-section) 78%, transparent))",
           border: `1px solid ${RGBA.gold(0.25)}`,
@@ -92,7 +92,7 @@ export default function Login() {
               onChange={e => setTel(fmt(e.target.value))}
               placeholder="LOGIN"
               maxLength={15}
-              className="w-full px-4 py-3.5 text-sm outline-none transition-all duration-200 rounded-sm"
+              className="w-full px-4 py-3.5 text-sm outline-none transition-all duration-200 radius-control"
               style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.2)}`, color: "var(--text-primary)", fontFamily: FONTS.body }}
               onFocus={e => {
                 e.target.style.borderColor = RGBA.gold(0.55);
@@ -106,7 +106,7 @@ export default function Login() {
               value={senha}
               onChange={e => setSenha(e.target.value)}
               placeholder="SENHA"
-              className="w-full px-4 py-3.5 text-sm outline-none transition-all duration-200 rounded-sm"
+              className="w-full px-4 py-3.5 text-sm outline-none transition-all duration-200 radius-control"
               style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.2)}`, color: "var(--text-primary)", fontFamily: FONTS.body }}
               onFocus={e => {
                 e.target.style.borderColor = RGBA.gold(0.55);
@@ -117,7 +117,7 @@ export default function Login() {
             />
 
             {erro && (
-              <p className="text-[11px] text-center py-2 px-3 rounded-sm" style={{ color: COLORS.accentRed, background: RGBA.red(0.07), fontFamily: FONTS.body }}>
+              <p className="text-[11px] text-center py-2 px-3 radius-control" style={{ color: COLORS.accentRed, background: RGBA.red(0.07), fontFamily: FONTS.body }}>
                 {erro}
               </p>
             )}
@@ -125,7 +125,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={load}
-              className="w-full py-3.5 text-[11px] font-bold tracking-[0.22em] transition-all duration-300 mt-1 rounded-sm"
+              className="w-full py-3.5 text-[11px] font-bold tracking-[0.22em] transition-all duration-300 mt-1 radius-control"
               style={{
                 background: load ? RGBA.gold(0.4) : GRADIENTS.goldFill,
                 color: COLORS.dark,
@@ -141,7 +141,7 @@ export default function Login() {
             ESQUECEU A SENHA?
           </p>
 
-          <div className="mt-5 rounded-sm overflow-hidden" style={{ border: `1px solid ${RGBA.gold(0.1)}` }}>
+          <div className="mt-5 radius-control overflow-hidden" style={{ border: `1px solid ${RGBA.gold(0.1)}` }}>
             <button
               onClick={() => setDevOpen(!devOpen)}
               className="w-full flex items-center justify-between px-3 py-2.5 text-[10px] font-semibold tracking-widest transition-all"
@@ -169,7 +169,7 @@ export default function Login() {
                       <button
                         key={i}
                         onClick={() => usarDevUser(u)}
-                        className="w-full flex items-center justify-between px-3 py-2.5 text-left transition-all duration-200 rounded-sm"
+                        className="w-full flex items-center justify-between px-3 py-2.5 text-left transition-all duration-200 radius-control"
                         style={{ background: "var(--bg-input)", border: `1px solid ${RGBA.gold(0.1)}` }}
                       >
                         <div>

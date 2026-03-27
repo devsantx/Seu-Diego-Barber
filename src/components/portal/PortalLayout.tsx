@@ -64,7 +64,7 @@ export default function PortalLayout() {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       >
         <div
-          className="w-full max-w-[1100px] h-[68px] flex items-center justify-between px-5 rounded-2xl transition-all duration-300"
+          className="w-full max-w-[1100px] h-[68px] flex items-center justify-between px-5 radius-panel transition-all duration-300"
           style={{
             background: scrolled ? "color-mix(in srgb, var(--bg-navbar) 92%, transparent)" : "var(--bg-navbar)",
             boxShadow: scrolled
@@ -110,7 +110,7 @@ export default function PortalLayout() {
             <ThemeToggle compact />
             <button
               onClick={sair}
-              className="flex items-center gap-1.5 px-4 py-2 text-[10.5px] font-bold tracking-[0.14em] transition-all duration-300 rounded-sm"
+              className="flex items-center gap-1.5 px-4 py-2 text-[10.5px] font-bold tracking-[0.14em] transition-all duration-300 radius-control"
               style={{ border: `1px solid ${RGBA.gold(0.35)}`, color: COLORS.gold, fontFamily: FONTS.title }}
               onMouseEnter={e => {
                 e.currentTarget.style.background = RGBA.gold(0.08);
@@ -160,7 +160,7 @@ export default function PortalLayout() {
             transition={{ duration: 0.25, ease: "easeOut" }}
           >
             <div
-              className="w-full max-w-[1100px] rounded-2xl overflow-hidden"
+              className="w-full max-w-[1100px] radius-panel overflow-hidden"
               style={{
                 background: "color-mix(in srgb, var(--bg-card) 96%, transparent)",
                 boxShadow: `0 12px 40px ${RGBA.black(0.35)}, 0 0 0 1px ${RGBA.gold(0.12)}`,
@@ -214,7 +214,7 @@ export default function PortalLayout() {
               <div className="px-4 pb-4 pt-2">
                 <button
                   onClick={sair}
-                  className="w-full py-3 text-[11px] font-bold tracking-[0.18em] rounded-sm border transition-all"
+                  className="w-full py-3 text-[11px] font-bold tracking-[0.18em] radius-control border transition-all"
                   style={{ borderColor: RGBA.gold(0.3), color: COLORS.gold, fontFamily: FONTS.title }}
                   onMouseEnter={e => {
                     e.currentTarget.style.background = RGBA.gold(0.07);
@@ -234,7 +234,7 @@ export default function PortalLayout() {
       <main className="flex-1 pt-28 pb-10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div
-            className="rounded-[28px] p-4 sm:p-5 mb-6"
+            className="radius-panel p-4 sm:p-5 mb-6"
             style={{
               background: "linear-gradient(180deg, color-mix(in srgb, var(--bg-card) 90%, transparent), color-mix(in srgb, var(--bg-section) 60%, transparent))",
               border: `1px solid ${RGBA.gold(0.1)}`,
@@ -250,7 +250,7 @@ export default function PortalLayout() {
                   Visual limpo para acompanhar agenda, plano e historico com mais rapidez.
                 </p>
               </div>
-              <div className="px-3 py-2 rounded-xl" style={{ background: RGBA.gold(0.07), border: `1px solid ${RGBA.gold(0.12)}` }}>
+              <div className="px-3 py-2 radius-card" style={{ background: RGBA.gold(0.07), border: `1px solid ${RGBA.gold(0.12)}` }}>
                 <p className="text-[10px] font-bold tracking-[0.18em]" style={{ color: COLORS.goldDeep, fontFamily: FONTS.title }}>
                   CLIENTE ATIVO
                 </p>

@@ -81,7 +81,7 @@ export default function Navbar() {
         transition={{ duration: 0.6, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
       >
         <div
-          className="w-full max-w-[1100px] h-[68px] flex items-center justify-between px-5 rounded-2xl transition-all duration-300"
+          className="w-full max-w-[1100px] h-[68px] flex items-center justify-between px-5 radius-panel transition-all duration-300"
           style={{
             background: scrolled ? "color-mix(in srgb, var(--bg-navbar) 92%, transparent)" : "var(--bg-navbar)",
             boxShadow: scrolled
@@ -119,7 +119,7 @@ export default function Navbar() {
             <ThemeToggle compact />
             <button
               onClick={entrarNoPortal}
-              className="px-5 py-[8px] text-[10.5px] font-bold tracking-[0.14em] rounded-sm transition-all duration-300"
+              className="px-5 py-[8px] text-[10.5px] font-bold tracking-[0.14em] radius-control transition-all duration-300"
               style={{ background: GRADIENTS.goldFill, color: COLORS.dark, fontFamily: FONTS.title }}
               onMouseEnter={e => {
                 e.currentTarget.style.opacity = "0.85";
@@ -169,7 +169,7 @@ export default function Navbar() {
             transition={{ duration: 0.25 }}
           >
             <div
-              className="w-full max-w-[1100px] rounded-2xl overflow-hidden"
+              className="w-full max-w-[1100px] radius-panel overflow-hidden"
               style={{
                 background: "color-mix(in srgb, var(--bg-card) 96%, transparent)",
                 boxShadow: `0 12px 40px ${RGBA.black(0.35)}, 0 0 0 1px ${RGBA.gold(0.12)}`,
@@ -193,7 +193,7 @@ export default function Navbar() {
                 ))}
               </div>
 
-              <div className="mx-4 mt-3 mb-2 rounded-xl overflow-hidden" style={{ border: `1px solid ${RGBA.gold(0.18)}` }}>
+              <div className="mx-4 mt-3 mb-2 radius-card overflow-hidden" style={{ border: `1px solid ${RGBA.gold(0.18)}` }}>
                 <div className="px-4 py-2.5" style={{ background: RGBA.gold(0.06), borderBottom: `1px solid ${RGBA.gold(0.1)}` }}>
                   <p className="text-[10px] font-bold tracking-[0.2em] text-center" style={{ color: COLORS.goldDark, fontFamily: FONTS.title }}>
                     PORTAL DE AGENDAMENTO

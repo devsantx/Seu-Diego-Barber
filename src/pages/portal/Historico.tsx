@@ -128,7 +128,7 @@ export default function Historico() {
             {PLANOS.map(p => {
               const economiaSePlano = Math.max(0, Math.round(totalCortes * valorMedioCorte - p.preco * Math.ceil(totalCortes / 4)));
               return (
-                <div key={p.id} className="p-3 rounded-sm"
+                <div key={p.id} className="p-3 radius-control"
                   style={{ background: RGBA.gold(0.05), border: `1px solid ${RGBA.gold(0.12)}` }}>
                   <p className="text-[10px] font-bold tracking-wider" style={{ color: COLORS.gold, fontFamily: FONTS.title }}>{p.nome}</p>
                   <p className="text-[10px] mb-1" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>{p.descricao}</p>
@@ -146,7 +146,7 @@ export default function Historico() {
             })}
           </div>
           {economiaPotencial > 0 && (
-            <div className="p-3 rounded-sm" style={{ background: RGBA.green(0.07), border: `1px solid ${RGBA.green(0.2)}` }}>
+            <div className="p-3 radius-control" style={{ background: RGBA.green(0.07), border: `1px solid ${RGBA.green(0.2)}` }}>
               <p className="text-[11px]" style={{ color: COLORS.accentGreen, fontFamily: FONTS.body }}>
                 💚 Com o <strong>Plano Essencial</strong> você teria economizado{" "}
                 <strong>R$ {economiaPotencial}</strong> no total!

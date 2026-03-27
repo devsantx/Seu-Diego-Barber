@@ -44,7 +44,7 @@ function PlanoModal({ plano, planoAtual, onClose }: { plano: PlanoMock; planoAtu
     <motion.div className="fixed inset-0 z-[200] flex items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <div className="absolute inset-0" style={{ background: RGBA.black(0.85), backdropFilter: "blur(6px)" }} onClick={onClose} />
       <motion.div
-        className="relative w-full max-w-sm overflow-hidden rounded-2xl"
+        className="relative w-full max-w-sm overflow-hidden radius-panel"
         style={{ background: "linear-gradient(160deg, var(--bg-card), color-mix(in srgb, var(--bg-section) 76%, transparent))", border: `1px solid ${RGBA.gold(0.3)}`, boxShadow: `0 25px 60px ${RGBA.black(0.35)}` }}
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -66,7 +66,7 @@ function PlanoModal({ plano, planoAtual, onClose }: { plano: PlanoMock; planoAtu
 
         <div className="px-6 py-5">
           {isUpgrade && ganhosMais.length > 0 && (
-            <div className="mb-4 p-3 rounded-xl" style={{ background: RGBA.green(0.06), border: `1px solid ${RGBA.green(0.2)}` }}>
+            <div className="mb-4 p-3 radius-card" style={{ background: RGBA.green(0.06), border: `1px solid ${RGBA.green(0.2)}` }}>
               <p className="text-[10px] font-bold tracking-widest mb-2" style={{ color: COLORS.accentGreen, fontFamily: FONTS.title }}>
                 O QUE VOCE GANHA
               </p>
@@ -110,7 +110,7 @@ function PlanoModal({ plano, planoAtual, onClose }: { plano: PlanoMock; planoAtu
 
 function ResumoPlano({ titulo, valor, descricao }: { titulo: string; valor: string; descricao: string }) {
   return (
-    <div className="p-4 rounded-2xl" style={{ background: "var(--bg-card)", border: `1px solid ${RGBA.gold(0.12)}`, boxShadow: `0 12px 28px ${RGBA.black(0.06)}` }}>
+    <div className="p-4 radius-panel" style={{ background: "var(--bg-card)", border: `1px solid ${RGBA.gold(0.12)}`, boxShadow: `0 12px 28px ${RGBA.black(0.06)}` }}>
       <p className="text-[10px] font-bold tracking-[0.24em]" style={{ color: COLORS.goldDeep, fontFamily: FONTS.title }}>{titulo}</p>
       <p className="text-lg font-bold mt-2" style={{ color: "var(--text-primary)", fontFamily: FONTS.title }}>{valor}</p>
       <p className="text-[11px] mt-1 leading-relaxed" style={{ color: "var(--text-muted)", fontFamily: FONTS.body }}>{descricao}</p>
@@ -162,7 +162,7 @@ export default function Planos() {
 
       {planoAtual?.ativo ? (
         <motion.div
-          className="p-6 mb-7 relative overflow-hidden rounded-2xl"
+          className="p-6 mb-7 relative overflow-hidden radius-panel"
           style={{ background: "linear-gradient(135deg, var(--bg-card), color-mix(in srgb, var(--bg-section) 58%, rgba(201,162,74,0.08)))", border: `1px solid ${RGBA.gold(0.3)}`, boxShadow: `0 18px 36px ${RGBA.black(0.1)}` }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -189,7 +189,7 @@ export default function Planos() {
             const beneficiosExtras = BENEFICIOS_EXTRAS[planoAtual.id + 1] ?? [];
 
             return proxPlano ? (
-              <div className="mt-4 p-4 rounded-xl" style={{ background: RGBA.green(0.05), border: `1px solid ${RGBA.green(0.15)}` }}>
+              <div className="mt-4 p-4 radius-card" style={{ background: RGBA.green(0.05), border: `1px solid ${RGBA.green(0.15)}` }}>
                 <p className="text-[10px] font-bold tracking-widest mb-1" style={{ color: COLORS.accentGreen, fontFamily: FONTS.title }}>
                   UPGRADE DISPONIVEL — {proxPlano.nome}
                 </p>
@@ -212,7 +212,7 @@ export default function Planos() {
         </motion.div>
       ) : (
         <motion.div
-          className="p-6 mb-7 rounded-2xl"
+          className="p-6 mb-7 radius-panel"
           style={{ background: "linear-gradient(180deg, color-mix(in srgb, var(--bg-card) 95%, transparent), color-mix(in srgb, var(--bg-section) 65%, transparent))", border: `1px dashed ${RGBA.gold(0.25)}` }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -228,7 +228,7 @@ export default function Planos() {
             {PLANOS.map(p => {
               const econom = Math.max(0, Math.round(totalCortes * valorMedioCorte - p.preco * Math.ceil(totalCortes / 4)));
               return econom > 0 ? (
-                <div key={p.id} className="p-3 rounded-xl flex items-center justify-between gap-3" style={{ background: RGBA.green(0.05), border: `1px solid ${RGBA.green(0.12)}` }}>
+                <div key={p.id} className="p-3 radius-card flex items-center justify-between gap-3" style={{ background: RGBA.green(0.05), border: `1px solid ${RGBA.green(0.12)}` }}>
                   <span className="text-[10px] font-semibold" style={{ color: COLORS.gold, fontFamily: FONTS.title }}>{p.nome}</span>
                   <span className="text-[10px]" style={{ color: COLORS.accentGreen, fontFamily: FONTS.body }}>
                     Economizaria R$ {econom}
@@ -254,7 +254,7 @@ export default function Planos() {
           return (
             <motion.div
               key={p.id}
-              className="p-5 cursor-pointer transition-all relative rounded-2xl min-h-[230px] flex flex-col"
+              className="p-5 cursor-pointer transition-all relative radius-panel min-h-[230px] flex flex-col"
               style={{
                 background: isAtual ? "color-mix(in srgb, var(--bg-card) 86%, rgba(201,162,74,0.08))" : "var(--bg-card)",
                 border: isAtual ? `1px solid ${RGBA.gold(0.35)}` : `1px solid ${RGBA.gold(0.1)}`,
